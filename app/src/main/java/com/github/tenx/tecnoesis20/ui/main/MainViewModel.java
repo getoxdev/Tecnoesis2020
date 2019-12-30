@@ -11,6 +11,7 @@ import com.github.tenx.tecnoesis20.data.models.FeedBody;
 import com.github.tenx.tecnoesis20.data.models.HomeEventBody;
 import com.github.tenx.tecnoesis20.data.models.LocationDetailBody;
 import com.github.tenx.tecnoesis20.data.models.ModuleBody;
+import com.github.tenx.tecnoesis20.data.models.TeamBody;
 import com.github.tenx.tecnoesis20.ui.MyApplication;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +38,10 @@ public class MainViewModel  extends AndroidViewModel {
     private MutableLiveData<List<String>> ldPagerImageList;
     private MutableLiveData<List<HomeEventBody>> ldMainEventList;
     private MutableLiveData<List<FeedBody>> ldFeedList;
+    private MutableLiveData<List<TeamBody>> ldTeamsList;
     private MutableLiveData<Boolean> isMainContentLoaded;
+
+
 
 
     public LiveData<List<FeedBody>> getLdFeedList() {
@@ -57,6 +61,7 @@ public class MainViewModel  extends AndroidViewModel {
         ldMainEventList = new MutableLiveData<>();
         isMainContentLoaded = new MutableLiveData<>();
         ldFeedList = new MutableLiveData<>();
+        ldTeamsList = new MutableLiveData<>();
 
     }
 
@@ -266,6 +271,39 @@ public class MainViewModel  extends AndroidViewModel {
 
 //                    post update to activity
                 ldFeedList.postValue(temp);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public MutableLiveData<List<TeamBody>> getLdTeamsList() {
+        return ldTeamsList;
+    }
+
+    public void loadTeamsData(){
+
+        db.getReference().child("teams").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
+                List<TeamBody> temp = new ArrayList<>();
+                while (iterator.hasNext()){
+
+                    DataSnapshot snap = iterator.next();
+
+                    TeamBody data = snap.getValue(TeamBody.class);
+                    temp.add(data);
+                }
+
+//                    post update to activity
+                ldTeamsList.postValue(temp);
 
             }
 

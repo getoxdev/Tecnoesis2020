@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         viewModel.loadSponsors();
         viewModel.loadPagerImages();
         viewModel.loadFeedsData();
+        viewModel.loadTeamsData();
     }
 
     public MainViewModel getViewModel() {
