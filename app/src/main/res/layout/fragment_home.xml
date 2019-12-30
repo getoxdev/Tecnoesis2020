@@ -61,13 +61,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_home_sponsors"
-                    android:layout_below="@id/recycler_home_events"
                     android:text="OUR SPONSORS"
-                    android:layout_margin="15dp"
+                    android:paddingStart="@dimen/margin_padding_size_medium"
+                    android:paddingEnd="@dimen/margin_padding_size_medium"
+                    android:paddingBottom="@dimen/margin_padding_size_small"
+                    android:paddingTop="@dimen/margin_padding_size_small"
                     android:textSize="@dimen/text_size_large"
-                    android:textColor="@color/md_white_1000"
+                    android:textColor="@color/md_grey_50"
                     android:fontFamily="@font/lora_bold"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:background="@color/bg_card_50_opac_black"/>
 
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -90,6 +93,21 @@
                 android:layout_height="match_parent"
                 tools:listitem="@layout/listitem_home_events"
                 android:nestedScrollingEnabled="false"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FEEDS"
+                android:paddingStart="@dimen/margin_padding_size_medium"
+                android:paddingEnd="@dimen/margin_padding_size_medium"
+                android:paddingBottom="@dimen/margin_padding_size_small"
+                android:paddingTop="@dimen/margin_padding_size_small"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/md_grey_50"
+                android:fontFamily="@font/lora_bold"
+                android:textStyle="bold"
+                android:background="@color/bg_card_50_opac_black"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
