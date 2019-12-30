@@ -67,6 +67,9 @@
                 android:layout_marginTop="2dp"
                 android:textColor="@color/md_white_1000"
                 android:textSize="@dimen/text_size_small"
+                android:linksClickable="true"
+                android:autoLink="web"
+                android:textColorLink="@color/md_blue_600"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sapien velit, aliquet eget commodo nec, auctor a sapien. Nam eu neque vulputate diam rhoncus faucibus. Curabitur quis varius libero. Lorem." />
 
 

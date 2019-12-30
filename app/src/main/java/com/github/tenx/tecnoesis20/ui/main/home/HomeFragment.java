@@ -31,6 +31,8 @@ public class HomeFragment extends Fragment {
     NewtonCradleLoading progressLoading;
     @BindView(R.id.ll_main_content)
     LinearLayout llMainContent;
+    @BindView(R.id.recycler_home_feeds)
+    RecyclerView recyclerHomeFeeds;
 
 //    google fragment lifecycle or https://developer.android.com/guide/components/fragments if you are unsure about how to use fragment lifecycle
 
@@ -51,6 +53,7 @@ public class HomeFragment extends Fragment {
     private SliderAdapter homeSliderAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private SponsorsAdapter sponsorsAdapter;
+    private FeedAdapter feedAdapter;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -64,6 +67,7 @@ public class HomeFragment extends Fragment {
         initModuleRecycler();
         initSlider();
         initSponsorsRecycler();
+        initFeedsRecycler(getActivity());
         return parent;
 
     }
@@ -99,10 +103,14 @@ public class HomeFragment extends Fragment {
         });
 
         parentViewModel.getIsMainContentLoaded().observe(getActivity(), isLoaded -> {
-                        if(isLoaded)
-                            hideProress();
-                        else
-                            showProgress();
+            if (isLoaded)
+                hideProress();
+            else
+                showProgress();
+        });
+
+        parentViewModel.getLdFeedList().observe(getActivity() , data -> {
+            feedAdapter.setList(data);
         });
     }
 
@@ -139,6 +147,12 @@ public class HomeFragment extends Fragment {
         sponsorsRecycler.setLayoutManager(layoutManager);
         sponsorsAdapter = new SponsorsAdapter(getActivity());
         sponsorsRecycler.setAdapter(sponsorsAdapter);
+    }
+
+    private void initFeedsRecycler(Context context){
+            feedAdapter = new FeedAdapter(context);
+            recyclerHomeFeeds.setLayoutManager(new LinearLayoutManager(context));
+            recyclerHomeFeeds.setAdapter(feedAdapter);
     }
 
 

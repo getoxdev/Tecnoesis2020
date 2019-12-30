@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.github.tenx.tecnoesis20.data.models.FeedBody;
 import com.github.tenx.tecnoesis20.data.models.HomeEventBody;
 import com.github.tenx.tecnoesis20.data.models.LocationDetailBody;
 import com.github.tenx.tecnoesis20.data.models.ModuleBody;
@@ -35,9 +36,13 @@ public class MainViewModel  extends AndroidViewModel {
     private MutableLiveData<List<String>> ldSponsorImageList;
     private MutableLiveData<List<String>> ldPagerImageList;
     private MutableLiveData<List<HomeEventBody>> ldMainEventList;
+    private MutableLiveData<List<FeedBody>> ldFeedList;
     private MutableLiveData<Boolean> isMainContentLoaded;
 
 
+    public LiveData<List<FeedBody>> getLdFeedList() {
+        return ldFeedList;
+    }
 
     public MainViewModel(@NonNull Application application)
     {
@@ -51,6 +56,7 @@ public class MainViewModel  extends AndroidViewModel {
         ldPagerImageList = new MutableLiveData<>();
         ldMainEventList = new MutableLiveData<>();
         isMainContentLoaded = new MutableLiveData<>();
+        ldFeedList = new MutableLiveData<>();
 
     }
 
@@ -237,6 +243,35 @@ public class MainViewModel  extends AndroidViewModel {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 isMainContentLoaded.postValue(true);
+            }
+        });
+    }
+
+    public void loadFeedsData(){
+
+        db.getReference().child("feeds").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
+                List<FeedBody> temp = new ArrayList<>();
+                while (iterator.hasNext()){
+
+                    DataSnapshot snap = iterator.next();
+
+                    FeedBody data = snap.getValue(FeedBody.class);
+                    temp.add(data);
+                }
+
+//                    post update to activity
+                ldFeedList.postValue(temp);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }

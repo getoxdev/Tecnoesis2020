@@ -13,10 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.bumptech.glide.Glide;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.data.models.EventBody;
 import com.github.tenx.tecnoesis20.data.models.ModuleBody;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -73,6 +76,19 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             headerHolder.tvModuleDescription.setText(moduleBody.getDescription());
             headerHolder.tvModuleName.setText(moduleBody.getName());
             Glide.with(context).load(moduleBody.getImage()).into(headerHolder.ivModuleImage);
+
+            headerHolder.ivModuleImage.setOnClickListener(v -> {
+                List<String> images= new ArrayList<>();
+                images.add(moduleBody.getImage());
+
+                GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
+                        .setFailureImage(R.drawable.placeholder_image)
+                        .setProgressBarImage(R.drawable.placeholder_image)
+                        .setPlaceholderImage(R.drawable.placeholder_image);
+                new ImageViewer.Builder(context, images)
+                        .setStartPosition(0).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
+                        .show();
+            });
         }else {
            EventBody current = listEvents.get(position-1);
             CustomViewHolder itemholder =  (CustomViewHolder) holder;

@@ -45,7 +45,22 @@
             android:textSize="@dimen/text_size_medium"
             android:paddingLeft="@dimen/margin_padding_size_small"
             android:paddingRight="@dimen/margin_padding_size_small"
+            android:linksClickable="true"
+            android:autoLink="web"
+            android:textColorLink="@color/md_blue_600"
             android:text="Tecnoesis 2020 presents before you an amazing and alluring blende of events and modules. Dive straight into the world of techies and ignite the innovative genius within you. Particapate in workshops to discover exciting new topics."/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_home_recycler_website"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_below="@id/tv_home_description"
+            android:layout_marginStart="@dimen/margin_padding_size_medium"
+            android:layout_marginTop="@dimen/margin_padding_size_medium"
+            android:text="Visit Website"
+            app:icon="@drawable/ic_websiite"
+            />
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

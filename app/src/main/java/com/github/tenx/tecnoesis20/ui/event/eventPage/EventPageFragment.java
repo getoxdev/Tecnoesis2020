@@ -13,11 +13,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.data.models.EventBody;
 import com.github.tenx.tecnoesis20.ui.MyApplication;
 import com.github.tenx.tecnoesis20.ui.event.EventActivity;
 import com.google.android.material.button.MaterialButton;
+import com.stfalcon.frescoimageviewer.ImageViewer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -87,10 +92,25 @@ public class EventPageFragment extends Fragment {
         tvEventDesc.setText(data.getDescription());
         tvEventTitle.setText(data.getName());
         Glide.with(context).load(data.getImage()).into(ivEventImage);
+
+        ivEventImage.setOnClickListener(v -> {
+            List<String> images= new ArrayList<>();
+            images.add(data.getImage());
+
+            GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
+                    .setFailureImage(R.drawable.placeholder_image)
+                    .setProgressBarImage(R.drawable.placeholder_image)
+                    .setPlaceholderImage(R.drawable.placeholder_image);
+            new ImageViewer.Builder(context, images)
+                    .setStartPosition(0).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
+                    .show();
+        });
+
         tvEventRules.setText("");
         String temp = "";
-        for(String text : data.getRules()){
-            temp += text + "\n\n";
+        for(int i =0; i<data.getRules().size() ; i++){
+            String text = data.getRules().get(i);
+            temp +=  i+1+" : " + text + "\n\n";
 
         }
         tvEventRules.setText(temp);

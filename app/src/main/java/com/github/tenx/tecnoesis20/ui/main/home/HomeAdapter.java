@@ -1,6 +1,8 @@
 package com.github.tenx.tecnoesis20.ui.main.home;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.data.models.HomeEventBody;
+import com.google.android.material.button.MaterialButton;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 
 
 import java.util.ArrayList;
@@ -23,11 +28,11 @@ import butterknife.ButterKnife;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ImageViewHOlder> {
 
-    private Context tcontext;
+    private Context context;
     private List<HomeEventBody> hlist;
 
     public HomeAdapter(Context tcontext) {
-        this.tcontext = tcontext;
+        this.context = tcontext;
         this.hlist =  new ArrayList<>();
     }
 
@@ -50,7 +55,31 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ImageViewHOlde
 
         holder.tvName.setText(currentData.getName());
         holder.tvDescription.setText(currentData.getDescription());
-        Glide.with(tcontext).load(currentData.getImage()).placeholder(R.drawable.placeholder_image).into(holder.ivImage);
+        Glide.with(context).load(currentData.getImage()).placeholder(R.drawable.placeholder_image).into(holder.ivImage);
+        holder.ivImage.setOnClickListener(v -> {
+            List<String> images= new ArrayList<>();
+            images.add(currentData.getImage());
+
+            GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
+                    .setFailureImage(R.drawable.placeholder_image)
+                    .setProgressBarImage(R.drawable.placeholder_image)
+                    .setPlaceholderImage(R.drawable.placeholder_image);
+            new ImageViewer.Builder(context, images)
+                    .setStartPosition(0).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
+                    .show();
+        });
+
+        String website = currentData.getWebsite();
+        if(website.equals("")){
+            holder.btnWebsite.setVisibility(View.GONE);
+        }else {
+            holder.btnWebsite.setOnClickListener(v-> {
+//            go to url
+                openUrl(website , context);
+            });
+        }
+
+
 
     }
 
@@ -70,11 +99,23 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ImageViewHOlde
         @BindView(R.id.tv_home_description)
         TextView tvDescription;
 
+        @BindView(R.id.btn_home_recycler_website)
+        MaterialButton btnWebsite;
+
         public ImageViewHOlder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
 
         }
     }
+
+
+    private void openUrl(String url, Context context){
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        context.startActivity(i);
+    }
 }
+
+
 

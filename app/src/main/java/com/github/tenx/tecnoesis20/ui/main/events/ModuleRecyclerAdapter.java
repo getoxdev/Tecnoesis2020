@@ -12,12 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.github.tenx.tecnoesis20.Config;
 import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.Utils;
 import com.github.tenx.tecnoesis20.data.models.ModuleBody;
 import com.github.tenx.tecnoesis20.ui.module.ModuleActivity;
 import com.google.android.material.button.MaterialButton;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,11 +75,26 @@ public class ModuleRecyclerAdapter extends RecyclerView.Adapter<ModuleRecyclerAd
 
         ModuleBody currentItem = listModules.get(position);
         Glide.with(context).load(currentItem.getImage()).into(holder.ivEventsModuleImage);
+        holder.ivEventsModuleImage.setOnClickListener(v -> {
+            List<String> images= new ArrayList<>();
+            images.add(currentItem.getImage());
+
+            GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
+                    .setFailureImage(R.drawable.placeholder_image)
+                    .setProgressBarImage(R.drawable.placeholder_image)
+                    .setPlaceholderImage(R.drawable.placeholder_image);
+            new ImageViewer.Builder(context, images)
+                    .setStartPosition(0).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
+                    .show();
+        });
+
         holder.tvEventsModuleName.setText(currentItem.getName().toUpperCase());
 
         holder.btnModuleItemReadMore.setOnClickListener(v -> {
             changeActivity(position);
         });
+
+
     }
 
     @Override
