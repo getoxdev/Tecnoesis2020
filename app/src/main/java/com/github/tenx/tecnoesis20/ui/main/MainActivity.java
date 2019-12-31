@@ -168,6 +168,37 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private void initFragmentPager(){
         fragmentPagerAdapter = new FragmentAdapter(getSupportFragmentManager() , FragmentPagerAdapter.POSITION_NONE);
         vpMainPager.setAdapter(fragmentPagerAdapter);
+        vpMainPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                int menu_id;
+
+                if(position == FragmentAdapter.INDEX_EVENTS)
+                    menu_id = R.id.nav_events;
+                else if(position == FragmentAdapter.INDEX_LOCATION)
+                    menu_id = R.id.nav_location;
+                else if(position == FragmentAdapter.INDEX_ABOUT)
+                    menu_id = R.id.nav_about;
+                else if(position == FragmentAdapter.INDEX_NOTIFICATIONS)
+                    menu_id = R.id.nav_notifications;
+                else
+                    menu_id = R.id.nav_home;
+
+                botNav.setSelectedItemId(menu_id);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
     }
 
 
