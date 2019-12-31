@@ -1,6 +1,8 @@
 package com.github.tenx.tecnoesis20.ui.module.modulefrag;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.data.models.EventBody;
 import com.github.tenx.tecnoesis20.data.models.ModuleBody;
+import com.google.android.material.button.MaterialButton;
 import com.stfalcon.frescoimageviewer.ImageViewer;
 
 import java.util.ArrayList;
@@ -76,7 +79,9 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             headerHolder.tvModuleDescription.setText(moduleBody.getDescription());
             headerHolder.tvModuleName.setText(moduleBody.getName());
             Glide.with(context).load(moduleBody.getImage()).into(headerHolder.ivModuleImage);
-
+            headerHolder.btnWebsite.setOnClickListener(v-> {
+                openUrl(moduleBody.getWebsite(), context);
+            });
             headerHolder.ivModuleImage.setOnClickListener(v -> {
                 List<String> images= new ArrayList<>();
                 images.add(moduleBody.getImage());
@@ -94,7 +99,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                         .setStartPosition(0).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
                         .show();
             });
-        }else {
+        }else if(listEvents != null){
            EventBody current = listEvents.get(position-1);
             CustomViewHolder itemholder =  (CustomViewHolder) holder;
 
@@ -112,7 +117,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return listEvents.size() + 1;
+        return listEvents == null ? 0 : listEvents.size() + 1;
     }
 
     @Override
@@ -122,6 +127,12 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         } else {
             return TYPE_ITEM;
         }
+    }
+
+    private void openUrl(String url, Context context) {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        context.startActivity(i);
     }
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
@@ -135,6 +146,8 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         TextView tvEventDateLoc;
         @BindView(R.id.tv_event_desc)
         TextView tvEventDesc;
+
+
 
         @BindView(R.id.llParent)
         LinearLayout llParent;
@@ -154,6 +167,8 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         TextView tvModuleName;
         @BindView(R.id.tv_module_description)
         TextView tvModuleDescription;
+        @BindView(R.id.btn_module_website)
+        MaterialButton btnWebsite;
 
         public CustomHeaderViewHolder(@NonNull View itemView) {
             super(itemView);

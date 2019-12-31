@@ -7,6 +7,7 @@
     android:padding="@dimen/margin_padding_size_small"
     android:background="@color/bg_card_25_opac_black"
     android:id="@+id/llParent"
+    android:layout_marginBottom="@dimen/margin_padding_size_small"
     >
 
     <LinearLayout
@@ -39,7 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/md_green_400"
-                android:textSize="@dimen/text_size_medium"
+                android:textSize="@dimen/text_size_large"
+
                 android:text="Jhonny Dep"
                 android:textStyle="bold"
                 />

@@ -86,7 +86,7 @@ public class ModuleRecyclerAdapter extends RecyclerView.Adapter<ModuleRecyclerAd
                     .setProgressBarImage(R.drawable.placeholder_image)
                     .setPlaceholderImage(R.drawable.placeholder_image);
             new ImageViewer.Builder(context, listModules).setFormatter(o -> ((ModuleBody) o).getImage()).setOverlayView(overlayView)
-                    .setStartPosition(0).setCustomDraweeHierarchyBuilder(hierarchyBuilder).setImageChangeListener(pos -> {
+                    .setStartPosition(position).setCustomDraweeHierarchyBuilder(hierarchyBuilder).setImageChangeListener(pos -> {
                         tvTitle.setText(listModules.get(pos).getName());
                         tvDesc.setText(listModules.get(pos).getDescription());
             })
@@ -94,6 +94,7 @@ public class ModuleRecyclerAdapter extends RecyclerView.Adapter<ModuleRecyclerAd
         });
 
         holder.tvEventsModuleName.setText(currentItem.getName().toUpperCase());
+        holder.tvModuleDescription.setText(currentItem.getDescription());
 
         holder.btnModuleItemReadMore.setOnClickListener(v -> {
             changeActivity(position);

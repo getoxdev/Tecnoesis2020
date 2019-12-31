@@ -11,6 +11,7 @@ import com.github.tenx.tecnoesis20.data.models.FeedBody;
 import com.github.tenx.tecnoesis20.data.models.HomeEventBody;
 import com.github.tenx.tecnoesis20.data.models.LocationDetailBody;
 import com.github.tenx.tecnoesis20.data.models.ModuleBody;
+import com.github.tenx.tecnoesis20.data.models.SponsorBody;
 import com.github.tenx.tecnoesis20.data.models.TeamBody;
 import com.github.tenx.tecnoesis20.ui.MyApplication;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +35,7 @@ public class MainViewModel  extends AndroidViewModel {
     private MutableLiveData<Boolean> isModulesLoaded;
     private MyApplication app;
     private FirebaseDatabase db;
-    private MutableLiveData<List<String>> ldSponsorImageList;
+    private MutableLiveData<List<SponsorBody>> ldSponsorImageList;
     private MutableLiveData<List<String>> ldPagerImageList;
     private MutableLiveData<List<HomeEventBody>> ldMainEventList;
     private MutableLiveData<List<TeamBody>> ldTeamsList;
@@ -67,7 +68,7 @@ public class MainViewModel  extends AndroidViewModel {
         return ldLocationDetailsList;
     }
 
-    public MutableLiveData<List<String>> getLdSponsorImageList() {
+    public MutableLiveData<List<SponsorBody>> getLdSponsorImageList() {
         return ldSponsorImageList;
     }
 
@@ -101,13 +102,13 @@ public class MainViewModel  extends AndroidViewModel {
                         DataSnapshot snap = iterator.next();
 
                         ModuleBody data = snap.getValue(ModuleBody.class);
-                        Timber.d("HomeEventBody : "+data.getEvents().size());
+
 
 
                         temp.add(data);
 
                         if(data.getEvents() != null){
-                            Timber.d("Events size : "+ data.getEvents().size());
+
                         }else {
                             Timber.d("Events is empty!");
                         }
@@ -164,12 +165,12 @@ public class MainViewModel  extends AndroidViewModel {
 
 
                 Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
-                List<String> temp = new ArrayList<>();
+                List<SponsorBody> temp = new ArrayList<>();
                 while (iterator.hasNext()){
 
                     DataSnapshot snap = iterator.next();
 
-                    String data = snap.getValue(String.class);
+                    SponsorBody data = snap.getValue(SponsorBody.class);
                     temp.add(data);
                 }
 

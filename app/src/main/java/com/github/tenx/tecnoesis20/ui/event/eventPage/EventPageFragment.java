@@ -40,6 +40,8 @@ public class EventPageFragment extends Fragment {
     LinearLayout ll1;
     @BindView(R.id.rl1)
     RelativeLayout rl1;
+    @BindView(R.id.ll_rules_container)
+    LinearLayout llRulesContainer;
     private int currentModuleIndex;
     private int currentEventIndex;
     private EventBody currentEvent;
@@ -111,7 +113,7 @@ public class EventPageFragment extends Fragment {
                     .setProgressBarImage(R.drawable.placeholder_image)
                     .setPlaceholderImage(R.drawable.placeholder_image);
 
-            View overlayView  = LayoutInflater.from(context).inflate(R.layout.overlay_image, null, false);
+            View overlayView = LayoutInflater.from(context).inflate(R.layout.overlay_image, null, false);
             TextView tvTitle = overlayView.findViewById(R.id.tv_overlay_title);
             TextView tvDesc = overlayView.findViewById(R.id.tv_overlay_description);
             tvDesc.setText(data.getDescription());
@@ -126,20 +128,30 @@ public class EventPageFragment extends Fragment {
             });
         }
 
-        btnEventWebsite.setOnClickListener(v-> {
-            if(data.getWebsite() == null)
-                openUrl("http://tecnoesis.org" , context);
+        btnEventWebsite.setOnClickListener(v -> {
+            if (data.getWebsite() == null)
+                openUrl("http://tecnoesis.org", context);
             else
-                openUrl(data.getWebsite() , context);
+                openUrl(data.getWebsite(), context);
         });
-        tvEventRules.setText("");
-        String temp = "";
-        for (int i = 0; i < data.getRules().size(); i++) {
-            String text = data.getRules().get(i);
-            temp += i + 1 + " : " + text + "\n\n";
+        if (data.getRules() != null) {
 
+            if(!data.getRules().isEmpty()){
+                llRulesContainer.setVisibility(View.VISIBLE);
+                tvEventRules.setText("");
+                String temp = "";
+                for (int i = 0; i < data.getRules().size(); i++) {
+                    String text = data.getRules().get(i);
+                    temp += i + 1 + " : " + text + "\n\n";
+
+                }
+                tvEventRules.setText(temp);
+            }else {
+                llRulesContainer.setVisibility(View.GONE);
+            }
+        }else {
+            llRulesContainer.setVisibility(View.GONE);
         }
-        tvEventRules.setText(temp);
 
 
     }

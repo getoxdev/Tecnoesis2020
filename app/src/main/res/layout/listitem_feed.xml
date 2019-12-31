@@ -13,8 +13,9 @@
         <ImageView
             android:id="@+id/iv_feed_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:maxHeight="200dp"
+            android:layout_height="wrap_content"
+            android:maxHeight="300dp"
+            android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             tools:src="@drawable/sky"
             />

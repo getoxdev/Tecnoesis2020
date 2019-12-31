@@ -30,10 +30,10 @@
             tools:text="Event 1"
             android:textAllCaps="true"
             android:textSize="@dimen/text_size_medium"
-            android:fontFamily="@font/lora_regular"
+            android:fontFamily="@font/lora_bold"
             android:layout_marginStart="@dimen/margin_padding_size_medium"
             android:layout_marginEnd="@dimen/margin_padding_size_medium"
-            android:textColor="@color/md_purple_600"
+            android:textColor="@color/md_purple_700"
             />
         <TextView
             android:id="@+id/tv_bot_sheet_event_date"

@@ -58,24 +58,30 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ImageViewHOlde
 
         holder.tvName.setText(currentData.getName());
         holder.tvDescription.setText(currentData.getDescription());
-        Glide.with(context).load(currentData.getImage()).placeholder(R.drawable.placeholder_image).into(holder.ivImage);
-        holder.ivImage.setOnClickListener(v -> {
 
-            overlayView  = LayoutInflater.from(context).inflate(R.layout.overlay_image, null, false);
+        if(currentData.getImage() != null){
+            if(!currentData.getImage().equals("")){
 
-            TextView tvOverlayTitle = overlayView.findViewById(R.id.tv_overlay_title);
-            TextView tvOverlayDesc = overlayView.findViewById(R.id.tv_overlay_description);
-            GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
-                    .setFailureImage(R.drawable.placeholder_image)
-                    .setProgressBarImage(R.drawable.placeholder_image)
-                    .setPlaceholderImage(R.drawable.placeholder_image);
-            new ImageViewer.Builder(context, hlist).setFormatter((ImageViewer.Formatter<HomeEventBody>) HomeEventBody::getImage).setOverlayView(overlayView).setImageChangeListener(pos -> {
-                tvOverlayDesc.setText(hlist.get(pos).getDescription());
-                tvOverlayTitle.setText(hlist.get(pos).getName());
-            })
-                    .setStartPosition(position).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
-                    .show();
-        });
+                Glide.with(context).load(currentData.getImage()).into(holder.ivImage);
+                holder.ivImage.setOnClickListener(v -> {
+
+                    overlayView  = LayoutInflater.from(context).inflate(R.layout.overlay_image, null, false);
+
+                    TextView tvOverlayTitle = overlayView.findViewById(R.id.tv_overlay_title);
+                    TextView tvOverlayDesc = overlayView.findViewById(R.id.tv_overlay_description);
+                    GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
+                            .setFailureImage(R.drawable.placeholder_image)
+                            .setProgressBarImage(R.drawable.placeholder_image)
+                            .setPlaceholderImage(R.drawable.placeholder_image);
+                    new ImageViewer.Builder(context, hlist).setFormatter((ImageViewer.Formatter<HomeEventBody>) HomeEventBody::getImage).setOverlayView(overlayView).setImageChangeListener(pos -> {
+                        tvOverlayDesc.setText(hlist.get(pos).getDescription());
+                        tvOverlayTitle.setText(hlist.get(pos).getName());
+                    })
+                            .setStartPosition(position).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
+                            .show();
+                });
+            }
+        }
 
         String website = currentData.getWebsite();
         if(website.equals("")){

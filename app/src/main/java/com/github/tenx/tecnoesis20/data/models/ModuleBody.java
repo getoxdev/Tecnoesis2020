@@ -3,6 +3,7 @@ package com.github.tenx.tecnoesis20.data.models;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,11 +19,29 @@ public class ModuleBody {
     @PropertyName("image")
     String image;
 
-    @PropertyName("HomeEventBody")
+    @PropertyName("events")
     List<EventBody> events;
+
+    @PropertyName("website")
+    String website;
+
+
 
 
     public ModuleBody() {
+        events = new ArrayList<>();
+        image = "";
+        description = "";
+        name = "";
+        website = "";
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public String getName() {

@@ -2,6 +2,7 @@ package com.github.tenx.tecnoesis20.data.models;
 
 import com.google.firebase.database.PropertyName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventBody {
@@ -36,6 +37,13 @@ public class EventBody {
     }
 
     public EventBody() {
+        rules = new ArrayList<>();
+        registerLink = "";
+        date  = "";
+        image = "";
+        description = "";
+        name = "";
+        website = "";
     }
 
     public String getName() {

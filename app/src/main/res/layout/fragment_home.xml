@@ -104,7 +104,7 @@
                 android:paddingEnd="@dimen/margin_padding_size_medium"
                 android:paddingBottom="@dimen/margin_padding_size_small"
                 android:paddingTop="@dimen/margin_padding_size_small"
-                android:textSize="@dimen/text_size_large"
+                android:textSize="@dimen/text_size_xlarge"
                 android:textColor="@color/md_grey_50"
                 android:fontFamily="@font/lora_bold"
                 android:textStyle="bold"

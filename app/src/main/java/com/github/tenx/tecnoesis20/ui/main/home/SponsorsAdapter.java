@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.github.tenx.tecnoesis20.R;
+import com.github.tenx.tecnoesis20.data.models.SponsorBody;
 import com.stfalcon.frescoimageviewer.ImageViewer;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import butterknife.ButterKnife;
 public class SponsorsAdapter extends RecyclerView.Adapter<SponsorsAdapter.ImageViewHOlder> {
 
     private Context context;
-    private List<String> hlist;
+    private List<SponsorBody> hlist;
 
     public SponsorsAdapter(Context tcontext) {
         this.context = tcontext;
@@ -41,12 +42,13 @@ public class SponsorsAdapter extends RecyclerView.Adapter<SponsorsAdapter.ImageV
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHOlder holder, final int position) {
-       Glide.with(context).load(hlist.get(position)).placeholder(R.drawable.placeholder_image).into(holder.imageView);
+       Glide.with(context).load(hlist.get(position).getImage()).placeholder(R.drawable.placeholder_image).into(holder.imageView);
 
         holder.imageView.setOnClickListener(v -> {
 
             View overlayView  = LayoutInflater.from(context).inflate(R.layout.overlay_image, null, false);
             TextView tvTitle = overlayView.findViewById(R.id.tv_overlay_title);
+            TextView tvDesc = overlayView.findViewById(R.id.tv_overlay_description);
 
             tvTitle.setText("OUR PARTNERS");
 
@@ -55,7 +57,9 @@ public class SponsorsAdapter extends RecyclerView.Adapter<SponsorsAdapter.ImageV
                     .setFailureImage(R.drawable.placeholder_image)
                     .setProgressBarImage(R.drawable.placeholder_image)
                     .setPlaceholderImage(R.drawable.placeholder_image);
-            new ImageViewer.Builder(context, hlist)
+            new ImageViewer.Builder(context, hlist).setFormatter(o -> ((SponsorBody) o).getImage()).setImageChangeListener(pos -> {
+                tvDesc.setText(hlist.get(pos).getDescription());
+            })
                     .setStartPosition(position).setCustomDraweeHierarchyBuilder(hierarchyBuilder).setOverlayView(overlayView)
                     .show();
         });
@@ -68,7 +72,7 @@ public class SponsorsAdapter extends RecyclerView.Adapter<SponsorsAdapter.ImageV
         return hlist == null ? 0 :  hlist.size();
     }
 
-    public void setHlist(List<String> hlist) {
+    public void setHlist(List<SponsorBody> hlist) {
         this.hlist = hlist;
         notifyDataSetChanged();
     }

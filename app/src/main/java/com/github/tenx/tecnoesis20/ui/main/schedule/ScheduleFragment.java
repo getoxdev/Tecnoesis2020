@@ -126,7 +126,7 @@ public class ScheduleFragment extends Fragment implements OnMapReadyCallback {
             Timber.e("Can't find style. Error:");
         }
         LatLng nitCords = new LatLng(24.7577, 92.7923);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(nitCords, 15.0f));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(nitCords, 16.0f));
     }
 
     private void initMapData(List<LocationDetailBody> locationData){
@@ -135,7 +135,7 @@ public class ScheduleFragment extends Fragment implements OnMapReadyCallback {
         markerRecord.clear();
         for (int i=0 ; i< locationData.size() ; i++) {
             LocationDetailBody data = locationData.get(i);
-            LatLng cords = new LatLng(Double.parseDouble(data.getLat()), Double.parseDouble(data.getLng()));
+            LatLng cords = new LatLng(data.getLat(), data.getLng());
 
             MarkerOptions opts = new MarkerOptions().position(cords).title(data.getName());
             opts.icon(getBitmap(R.drawable.ic_marker_purple));
@@ -145,6 +145,12 @@ public class ScheduleFragment extends Fragment implements OnMapReadyCallback {
         }
 
         map.setOnMarkerClickListener(marker1 -> {
+            if (marker1.isInfoWindowShown()) {
+                marker1.hideInfoWindow();
+            } else {
+                marker1.showInfoWindow();
+            }
+
             try {
                 initBottomSheetData(locationData.get(markerRecord.get(marker1.getId())) , getActivity());
                 return true;
@@ -152,7 +158,7 @@ public class ScheduleFragment extends Fragment implements OnMapReadyCallback {
                 Timber.e("Null error occured");
             }
 
-            return false;
+            return true;
         });
     }
 

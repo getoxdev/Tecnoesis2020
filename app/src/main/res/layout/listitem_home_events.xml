@@ -3,6 +3,7 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginBottom="@dimen/margin_padding_size_small"
     android:paddingBottom="@dimen/margin_padding_size_medium"
     app:cardBackgroundColor="@color/bg_card_50_opac_black">
@@ -30,14 +31,22 @@
                 android:orientation="horizontal"
                 android:layout_below="@id/tv_home_module_title"
                 >
+                <ImageView
+                    android:id="@+id/iv_home_event_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="250dp"
+                    android:maxWidth="200dp"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    tools:src="@drawable/digital" />
                 <TextView
                     android:id="@+id/tv_home_description"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_home_module_title"
                     android:textColor="@color/md_grey_200"
-                    android:layout_alignParentStart="true"
                     android:fontFamily="@font/lora_regular"
                     android:layout_marginTop="0dp"
                     android:layout_marginLeft="@dimen/margin_padding_size_small"
@@ -48,17 +57,10 @@
                     android:linksClickable="true"
                     android:autoLink="web"
                     android:textColorLink="@color/md_blue_600"
-                    android:text="Tecnoesis 2020 presents before you an amazing and alluring blende of events and modules. Dive straight into the world of techies and ignite the innovative genius within you. Particapate in workshops to discover exciting new topics."/>
+                    tools:text="Tecnoesis 2020 presents before you an amazing and alluring blende of events and modules. Dive straight into the world of techies and ignite the innovative genius within you. Particapate in workshops to discover exciting new topics."/>
 
 
-                <ImageView
-                    android:id="@+id/iv_home_event_image"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:maxHeight="200dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/digital" />
+
             </LinearLayout>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_home_recycler_website"
