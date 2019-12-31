@@ -80,12 +80,17 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             headerHolder.ivModuleImage.setOnClickListener(v -> {
                 List<String> images= new ArrayList<>();
                 images.add(moduleBody.getImage());
+                View overlayView  = LayoutInflater.from(context).inflate(R.layout.overlay_image, null, false);
+                TextView tvTitle = overlayView.findViewById(R.id.tv_overlay_title);
+                TextView tvDesc = overlayView.findViewById(R.id.tv_overlay_description);
+               tvTitle.setText(moduleBody.getName());
+               tvDesc.setText(moduleBody.getDescription());
 
                 GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
                         .setFailureImage(R.drawable.placeholder_image)
                         .setProgressBarImage(R.drawable.placeholder_image)
                         .setPlaceholderImage(R.drawable.placeholder_image);
-                new ImageViewer.Builder(context, images)
+                new ImageViewer.Builder(context, images).setOverlayView(overlayView)
                         .setStartPosition(0).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
                         .show();
             });

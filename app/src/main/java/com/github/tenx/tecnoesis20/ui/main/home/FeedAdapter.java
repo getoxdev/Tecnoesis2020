@@ -29,6 +29,8 @@ public class FeedAdapter extends FirebaseRecyclerPagingAdapter<FeedBody, FeedAda
 
 
     private Context context;
+    private View overlayView;
+
 
 
     public FeedAdapter(@NonNull DatabasePagingOptions<FeedBody> options, Context context) {
@@ -41,14 +43,24 @@ public class FeedAdapter extends FirebaseRecyclerPagingAdapter<FeedBody, FeedAda
 
         holder.tvFeedText.setText(model.getText());
         Glide.with(context).load(model.getImage()).placeholder(R.drawable.placeholder_image).into(holder.ivFeedImage);
+
+        LayoutInflater inflater;
+        ViewGroup root;
         holder.ivFeedImage.setOnClickListener(v -> {
+            overlayView  = LayoutInflater.from(context).inflate(R.layout.overlay_image, null, false);
+
+            TextView tvDesc = overlayView.findViewById(R.id.tv_overlay_description);
+
+
+            tvDesc.setText(model.getText());
+
             List<String> images= new ArrayList<>();
             images.add(model.getImage());
             GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
                     .setFailureImage(R.drawable.placeholder_image)
                     .setProgressBarImage(R.drawable.placeholder_image)
                     .setPlaceholderImage(R.drawable.placeholder_image);
-            new ImageViewer.Builder(context, images)
+            new ImageViewer.Builder(context, images).setOverlayView(overlayView)
                     .setStartPosition(0).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
                     .show();
         });
@@ -63,8 +75,7 @@ public class FeedAdapter extends FirebaseRecyclerPagingAdapter<FeedBody, FeedAda
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listitem_feed, parent, false);
-
-        return new CustomViewHolder(v);
+         return new CustomViewHolder(v);
     }
 
 

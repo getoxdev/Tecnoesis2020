@@ -18,12 +18,13 @@
             android:scaleType="centerCrop"
             tools:src="@drawable/sky"
             />
-        <TextView
+        <com.github.tenx.tecnoesis20.views.ExpandableTextView
             android:id="@+id/tv_feed_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="@string/lorem_180"
             android:textColor="@color/md_grey_100"
+            android:maxLines="4"
             android:padding="@dimen/margin_padding_size_medium"
             android:linksClickable="true"
             android:autoLink="web"

@@ -54,6 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:id="@+id/ll_home_sponsors_container"
                 android:background="@color/bg_card_50_opac_black"
                 android:layout_marginBottom="@dimen/margin_padding_size_small"
                 >
@@ -61,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_home_sponsors"
-                    android:text="OUR SPONSORS"
+                    android:text="OUR PARTNERS"
                     android:paddingStart="@dimen/margin_padding_size_medium"
                     android:paddingEnd="@dimen/margin_padding_size_medium"
                     android:paddingBottom="@dimen/margin_padding_size_small"

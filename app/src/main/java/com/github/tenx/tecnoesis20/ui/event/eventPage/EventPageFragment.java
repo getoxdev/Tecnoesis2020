@@ -110,7 +110,13 @@ public class EventPageFragment extends Fragment {
                     .setFailureImage(R.drawable.placeholder_image)
                     .setProgressBarImage(R.drawable.placeholder_image)
                     .setPlaceholderImage(R.drawable.placeholder_image);
-            new ImageViewer.Builder(context, images)
+
+            View overlayView  = LayoutInflater.from(context).inflate(R.layout.overlay_image, null, false);
+            TextView tvTitle = overlayView.findViewById(R.id.tv_overlay_title);
+            TextView tvDesc = overlayView.findViewById(R.id.tv_overlay_description);
+            tvDesc.setText(data.getDescription());
+            tvTitle.setText(data.getName());
+            new ImageViewer.Builder(context, images).setOverlayView(overlayView)
                     .setStartPosition(0).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
                     .show();
         });

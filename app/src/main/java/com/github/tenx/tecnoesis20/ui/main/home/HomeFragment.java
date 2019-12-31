@@ -38,6 +38,8 @@ public class HomeFragment extends Fragment {
     LinearLayout llMainContent;
     @BindView(R.id.recycler_home_feeds)
     RecyclerView recyclerHomeFeeds;
+    @BindView(R.id.ll_home_sponsors_container)
+    LinearLayout llHomeSponsorsContainer;
 
 //    google fragment lifecycle or https://developer.android.com/guide/components/fragments if you are unsure about how to use fragment lifecycle
 
@@ -107,7 +109,12 @@ public class HomeFragment extends Fragment {
         });
 
         parentViewModel.getLdSponsorImageList().observe(getActivity(), data -> {
-            sponsorsAdapter.setHlist(data);
+                if(!data.isEmpty()){
+                    llHomeSponsorsContainer.setVisibility(View.VISIBLE);
+                    sponsorsAdapter.setHlist(data);
+                }else {
+                    llHomeSponsorsContainer.setVisibility(View.GONE);
+                }
         });
 
 
@@ -158,7 +165,7 @@ public class HomeFragment extends Fragment {
         sponsorsRecycler.setAdapter(sponsorsAdapter);
     }
 
-    private void initFeedsRecycler(Context context){
+    private void initFeedsRecycler(Context context) {
 
         Query baseQuery = FirebaseDatabase.getInstance().getReference().child("feeds");
 
@@ -178,12 +185,10 @@ public class HomeFragment extends Fragment {
                 .setQuery(baseQuery, config, FeedBody.class)
                 .build();
 
-            feedAdapter = new FeedAdapter(options , context);
-            recyclerHomeFeeds.setLayoutManager(new LinearLayoutManager(context));
-            recyclerHomeFeeds.setAdapter(feedAdapter);
+        feedAdapter = new FeedAdapter(options, context);
+        recyclerHomeFeeds.setLayoutManager(new LinearLayoutManager(context));
+        recyclerHomeFeeds.setAdapter(feedAdapter);
     }
-
-
 
 
     private void hideProress() {

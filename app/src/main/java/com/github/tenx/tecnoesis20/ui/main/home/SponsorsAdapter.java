@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,12 +44,19 @@ public class SponsorsAdapter extends RecyclerView.Adapter<SponsorsAdapter.ImageV
        Glide.with(context).load(hlist.get(position)).placeholder(R.drawable.placeholder_image).into(holder.imageView);
 
         holder.imageView.setOnClickListener(v -> {
+
+            View overlayView  = LayoutInflater.from(context).inflate(R.layout.overlay_image, null, false);
+            TextView tvTitle = overlayView.findViewById(R.id.tv_overlay_title);
+
+            tvTitle.setText("OUR PARTNERS");
+
+
             GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
                     .setFailureImage(R.drawable.placeholder_image)
                     .setProgressBarImage(R.drawable.placeholder_image)
                     .setPlaceholderImage(R.drawable.placeholder_image);
             new ImageViewer.Builder(context, hlist)
-                    .setStartPosition(position).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
+                    .setStartPosition(position).setCustomDraweeHierarchyBuilder(hierarchyBuilder).setOverlayView(overlayView)
                     .show();
         });
 
