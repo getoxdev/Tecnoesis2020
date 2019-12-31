@@ -50,6 +50,8 @@ public class FcmService extends FirebaseMessagingService {
     {
         Context mContext = getApplicationContext();
         Intent resultIntent = new Intent(mContext , MainActivity.class);
+        resultIntent.putExtra(MainActivity.LOAD_NOTIFICATIONS, true);
+
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext,

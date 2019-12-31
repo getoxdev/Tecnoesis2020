@@ -1,5 +1,6 @@
 package com.github.tenx.tecnoesis20.ui.splash;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,7 +11,12 @@ import android.widget.ProgressBar;
 
 import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.ui.main.MainActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.victor.loading.newton.NewtonCradleLoading;
 
 import butterknife.BindView;
@@ -35,15 +41,12 @@ public class SplashActivity extends AppCompatActivity {
         mbtnNext.setOnClickListener(v -> {
 //            go to next screen
             showProgress();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent i = new Intent(SplashActivity.this, MainActivity.class);
-                    hideProgress();
-                    startActivity(i);
-                    finish();
-                }
-            }, 1500);
+            FirebaseMessaging.getInstance().subscribeToTopic("user").addOnCompleteListener(task -> {
+                Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                hideProgress();
+                startActivity(i);
+                finish();
+            });
         });
     }
 

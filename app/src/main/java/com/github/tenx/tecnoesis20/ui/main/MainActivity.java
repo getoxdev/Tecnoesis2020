@@ -6,10 +6,11 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager.widget.ViewPager;
 
 import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.ui.main.about.AboutFragment;
@@ -25,21 +26,22 @@ import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-
+    public static final String LOAD_NOTIFICATIONS = "notif";
 
     @BindView(R.id.act_main_bnv)
     BottomNavigationView botNav;
+
+
+    @BindView(R.id.vp_main_pager)
+    ViewPager vpMainPager;
+
+    private FragmentAdapter fragmentPagerAdapter;
 
     //    frags
     private MainViewModel viewModel;
 
     private HomeFragment fragHome;
-    private EventsFragment fragEvents;
-    private AboutFragment fragAbout;
-    private ScheduleFragment fragSchedule;
 
-    //    frag mans
-    private FragmentManager fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //        this is necessary bind call for BindView decorators
         ButterKnife.bind(this);
 //        set callback as implemented interface
+
+        initFragmentPager();
         botNav.setOnNavigationItemSelectedListener(this);
 
 //        get view model
@@ -65,10 +69,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 //        if coming back from module activity load HomeEventBody fragment first
         if (getIntent().getBooleanExtra(ModuleActivity.START_EVENTS, false)) {
-            initFragment(new EventsFragment());
+            vpMainPager.setCurrentItem(FragmentAdapter.INDEX_EVENTS);
             botNav.setSelectedItemId(R.id.nav_events);
-        } else {
-            initFragment(fragHome);
+        } else if (getIntent().getBooleanExtra(MainActivity.LOAD_NOTIFICATIONS, false)) {
+            vpMainPager.setCurrentItem(FragmentAdapter.INDEX_NOTIFICATIONS);
+            botNav.setSelectedItemId(R.id.nav_notifications);
         }
 
 
@@ -110,43 +115,40 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
         int colorID;
-        Fragment frag;
+        int index = 0;
+
         switch (id) {
             case R.id.nav_home:
-                frag = new HomeFragment();
                 colorID = R.color.nav_home;
+                index = FragmentAdapter.INDEX_HOME;
                 break;
             case R.id.nav_events:
-                frag = new EventsFragment();
+                index = FragmentAdapter.INDEX_EVENTS;
                 colorID = R.color.nav_events;
                 break;
             case R.id.nav_location:
-                frag = new ScheduleFragment();
+                index = FragmentAdapter.INDEX_LOCATION;
                 colorID = R.color.nav_schedule;
                 break;
             case R.id.nav_about:
-                frag = new AboutFragment();
+                index = FragmentAdapter.INDEX_ABOUT;
                 colorID = R.color.nav_about;
                 break;
             case R.id.nav_notifications:
-                frag = new NotificationsFragment();
+                index = FragmentAdapter.INDEX_NOTIFICATIONS;
                 colorID = R.color.nav_notifications;
                 break;
             default:
                 return false;
         }
-
         botNav.setBackgroundColor(getResources().getColor(colorID));
-        initFragment(frag);
+        vpMainPager.setCurrentItem(index, true);
+
         return true;
     }
 
 
-    private void initFragment(Fragment frag) {
-        fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.act_main_fl_container, frag).commit();
 
-    }
 
 
     private void initModulesData() {
@@ -163,6 +165,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return viewModel;
     }
 
+    private void initFragmentPager(){
+        fragmentPagerAdapter = new FragmentAdapter(getSupportFragmentManager() , FragmentPagerAdapter.POSITION_NONE);
+        vpMainPager.setAdapter(fragmentPagerAdapter);
+    }
 
 
 }
