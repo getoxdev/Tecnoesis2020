@@ -1,65 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/bg_card_50_opac_black"
-    android:paddingBottom="@dimen/margin_padding_size_medium"
-    >
-    <RelativeLayout
-        android:id="@+id/rl1"
-
+    android:layout_height="match_parent">
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardBackgroundColor="@color/bg_card_50_opac_black"
+        android:paddingBottom="@dimen/margin_padding_size_medium"
         >
-        <ImageView
-            android:id="@+id/iv_event_image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            tools:src="@mipmap/ic_launcher"
-            android:scaleType="centerCrop"
-            />
+        <RelativeLayout
+            android:id="@+id/rl1"
 
-        <LinearLayout
-            android:id="@+id/ll1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="170dp"
-            android:background="@color/bg_card_25_opac_black"
-            android:paddingStart="@dimen/margin_padding_size_medium"
-            android:paddingEnd="@dimen/margin_padding_size_medium"
-            android:layout_marginStart="@dimen/margin_padding_size_large"
-            android:layout_marginEnd="@dimen/margin_padding_size_large"
-
 
             >
-            <TextView
-                android:id="@+id/tv_event_title"
+            <ImageView
+                android:id="@+id/iv_event_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                tools:src="@mipmap/ic_launcher"
+                android:scaleType="centerCrop"
+                />
+
+            <LinearLayout
+                android:id="@+id/ll1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="@tools:sample/lorem"
-                android:layout_marginStart="@dimen/margin_padding_size_small"
-                android:textColor="@color/md_grey_100"
-                android:fontFamily="@font/lora_bold"
-                android:textSize="@dimen/text_size_xlarge"
-                />
+                android:orientation="vertical"
+                android:layout_below="@id/iv_event_image"
+                android:background="@color/bg_card_25_opac_black"
+                android:paddingStart="@dimen/margin_padding_size_medium"
+                android:paddingEnd="@dimen/margin_padding_size_medium"
+                android:layout_marginStart="@dimen/margin_padding_size_large"
+                android:layout_marginEnd="@dimen/margin_padding_size_large"
 
-            <TextView
-                android:id="@+id/tv_event_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="12 oct"
-                android:textColor="@color/md_grey_200"
 
-                android:layout_marginStart="@dimen/margin_padding_size_small"
-                android:textAllCaps="true"
-                android:textSize="@dimen/text_size_small"
-                />
+                >
+                <TextView
+                    android:id="@+id/tv_event_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@tools:sample/lorem"
+                    android:layout_marginStart="@dimen/margin_padding_size_small"
+                    android:textColor="@color/md_grey_100"
+                    android:fontFamily="@font/lora_bold"
+                    android:textSize="@dimen/text_size_xlarge"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_event_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="12 oct"
+                    android:textColor="@color/md_grey_400"
+
+                    android:layout_marginStart="@dimen/margin_padding_size_small"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_small"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,43 +91,44 @@
                 </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/tv_event_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/lorem_30"
-                android:fontFamily="@font/lora_regular"
-                android:padding="@dimen/margin_padding_size_medium"
-                android:textSize="@dimen/text_size_medium"
-                android:textColor="@color/md_grey_100"
-                />
+                <TextView
+                    android:id="@+id/tv_event_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lorem_30"
+                    android:fontFamily="@font/lora_regular"
+                    android:padding="@dimen/margin_padding_size_medium"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textColor="@color/md_grey_200"
+                    />
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rules :"
-                android:fontFamily="@font/lora_bold"
-                android:textColor="@color/md_grey_50"
-                android:layout_marginStart="@dimen/margin_padding_size_small"
-                android:textSize="@dimen/text_size_large"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rules :"
+                    android:fontFamily="@font/lora_bold"
+                    android:textColor="@color/md_grey_50"
+                    android:layout_marginStart="@dimen/margin_padding_size_small"
+                    android:textSize="@dimen/text_size_large"
 
-                />
+                    />
 
-            <TextView
-                android:id="@+id/tv_event_rules"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/lorem_30"
-                android:fontFamily="@font/lora_regular"
-                android:padding="@dimen/margin_padding_size_medium"
-                android:textSize="@dimen/text_size_medium"
-                android:textColor="@color/md_grey_100"
-                />
-
-
+                <TextView
+                    android:id="@+id/tv_event_rules"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lorem_30"
+                    android:fontFamily="@font/lora_regular"
+                    android:padding="@dimen/margin_padding_size_medium"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textColor="@color/md_grey_200"
+                    />
 
 
-        </LinearLayout>
-    </RelativeLayout>
-</com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</ScrollView>

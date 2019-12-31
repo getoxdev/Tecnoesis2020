@@ -33,7 +33,8 @@ public class FirebaseNotificationAdapter extends FirebaseRecyclerAdapter<Notific
 
         Glide.with(context).load(model.getImage()).into(holder.civNotificationitemImage);
         holder.tvNotificationitemSenderName.setText(model.getSender());
-        holder.tvNotificationitemSubject.setText(model.getTitle());
+        String sub = "Sub : " + model.getTitle();
+        holder.tvNotificationitemSubject.setText(sub);
         holder.tvNotificationitemMessage.setText(model.getMessage());
         holder.tvNotificationitemDate.setText(model.getDate());
         Timber.d(model.toString());

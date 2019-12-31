@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
+import com.firebase.ui.database.paging.DatabasePagingOptions;
+import com.firebase.ui.database.paging.FirebaseRecyclerPagingAdapter;
+import com.firebase.ui.database.paging.LoadingState;
 import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.data.models.FeedBody;
 import com.stfalcon.frescoimageviewer.ImageViewer;
@@ -22,20 +25,38 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CustomViewHolder> {
+public class FeedAdapter extends FirebaseRecyclerPagingAdapter<FeedBody, FeedAdapter.CustomViewHolder> {
 
 
     private Context context;
-    private List<FeedBody> list;
 
-    public FeedAdapter(Context context) {
+
+    public FeedAdapter(@NonNull DatabasePagingOptions<FeedBody> options, Context context) {
+        super(options);
         this.context = context;
-        list = new ArrayList<>();
     }
 
-    public void setList(List<FeedBody> list) {
-        this.list = list;
-        notifyDataSetChanged();
+    @Override
+    protected void onBindViewHolder(@NonNull CustomViewHolder holder, int position, @NonNull FeedBody model) {
+
+        holder.tvFeedText.setText(model.getText());
+        Glide.with(context).load(model.getImage()).placeholder(R.drawable.placeholder_image).into(holder.ivFeedImage);
+        holder.ivFeedImage.setOnClickListener(v -> {
+            List<String> images= new ArrayList<>();
+            images.add(model.getImage());
+            GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
+                    .setFailureImage(R.drawable.placeholder_image)
+                    .setProgressBarImage(R.drawable.placeholder_image)
+                    .setPlaceholderImage(R.drawable.placeholder_image);
+            new ImageViewer.Builder(context, images)
+                    .setStartPosition(0).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
+                    .show();
+        });
+    }
+
+    @Override
+    protected void onLoadingStateChanged(@NonNull LoadingState state) {
+
     }
 
     @NonNull
@@ -46,31 +67,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.CustomViewHold
         return new CustomViewHolder(v);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-        FeedBody currentData = list.get(position);
-
-        holder.tvFeedText.setText(currentData.getText());
-        Glide.with(context).load(currentData.getImage()).placeholder(R.drawable.placeholder_image).into(holder.ivFeedImage);
-        holder.ivFeedImage.setOnClickListener(v -> {
-            List<String> images= new ArrayList<>();
-            images.add(currentData.getImage());
-
-            GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
-                    .setFailureImage(R.drawable.placeholder_image)
-                    .setProgressBarImage(R.drawable.placeholder_image)
-                    .setPlaceholderImage(R.drawable.placeholder_image);
-            new ImageViewer.Builder(context, images)
-                    .setStartPosition(0).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
-                    .show();
-        });
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return list == null ? 0 : list.size();
-    }
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
 

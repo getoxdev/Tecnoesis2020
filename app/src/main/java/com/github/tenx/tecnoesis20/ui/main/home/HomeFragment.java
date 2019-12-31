@@ -12,12 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.paging.DatabasePagingOptions;
 import com.github.tenx.tecnoesis20.R;
+import com.github.tenx.tecnoesis20.data.models.FeedBody;
 import com.github.tenx.tecnoesis20.ui.main.MainActivity;
 import com.github.tenx.tecnoesis20.ui.main.MainViewModel;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -83,11 +88,19 @@ public class HomeFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        feedAdapter.stopListening();
+    }
+
     @Override
     public void onStart() {
         super.onStart();
 
 //        @TODO how to call view model demo
+        feedAdapter.startListening();
 
         parentViewModel.getLdPagerImageList().observe(getActivity(), data -> {
             homeSliderAdapter.setImageUrls(data);
@@ -107,10 +120,6 @@ public class HomeFragment extends Fragment {
                 hideProress();
             else
                 showProgress();
-        });
-
-        parentViewModel.getLdFeedList().observe(getActivity() , data -> {
-            feedAdapter.setList(data);
         });
     }
 
@@ -150,10 +159,31 @@ public class HomeFragment extends Fragment {
     }
 
     private void initFeedsRecycler(Context context){
-            feedAdapter = new FeedAdapter(context);
+
+        Query baseQuery = FirebaseDatabase.getInstance().getReference().child("feeds");
+
+// This configuration comes from the Paging Support Library
+// https://developer.android.com/reference/android/arch/paging/PagedList.Config.html
+
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPrefetchDistance(5)
+                .setPageSize(10)
+                .build();
+
+// The options for the adapter combine the paging configuration with query information
+// and application-specific options for lifecycle, etc.
+        DatabasePagingOptions<FeedBody> options = new DatabasePagingOptions.Builder<FeedBody>()
+                .setLifecycleOwner(this)
+                .setQuery(baseQuery, config, FeedBody.class)
+                .build();
+
+            feedAdapter = new FeedAdapter(options , context);
             recyclerHomeFeeds.setLayoutManager(new LinearLayoutManager(context));
             recyclerHomeFeeds.setAdapter(feedAdapter);
     }
+
+
 
 
     private void hideProress() {
