@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.tenx.tecnoesis20.R;
@@ -82,7 +83,15 @@ public class TeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 MemberItem currentMembers = (MemberItem) baseList.get(position);
                 MembersAdapter adapter = new MembersAdapter(context);
                 adapter.setList(currentMembers.getMembers());
-                membersVh.recyclerMembers.setLayoutManager(new GridLayoutManager(context, 2));
+
+                if(currentMembers.getMembers().size() == 1){
+//                    if single member center the content horizontally
+                    membersVh.recyclerMembers.setLayoutManager(new LinearLayoutManager(context));
+                }else {
+                    membersVh.recyclerMembers.setLayoutManager(new GridLayoutManager(context, 2));
+                }
+
+
                 membersVh.recyclerMembers.setAdapter(adapter);
 
             }

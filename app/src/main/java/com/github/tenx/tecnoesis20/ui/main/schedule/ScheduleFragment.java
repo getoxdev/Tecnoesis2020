@@ -152,7 +152,12 @@ public class ScheduleFragment extends Fragment implements OnMapReadyCallback {
             }
 
             try {
-                initBottomSheetData(locationData.get(markerRecord.get(marker1.getId())) , getActivity());
+               new Handler().postDelayed(new Runnable() {
+                   @Override
+                   public void run() {
+                       initBottomSheetData(locationData.get(markerRecord.get(marker1.getId())) , getActivity());
+                   }
+               },1000);
                 return true;
             }catch (NullPointerException e){
                 Timber.e("Null error occured");

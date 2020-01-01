@@ -10,6 +10,7 @@
         android:id="@+id/recycler_team_member_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         tools:listitem="@layout/griditem_member"
         android:nestedScrollingEnabled="false"
 
