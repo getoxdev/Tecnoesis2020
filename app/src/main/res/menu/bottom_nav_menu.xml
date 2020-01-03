@@ -24,12 +24,13 @@
         android:icon="@drawable/nav_location"
         app:showAsAction="never" />
     <item
-        android:id="@+id/nav_about"
+        android:id="@+id/nav_teams"
         android:orderInCategory="100"
-        android:title="@string/botnav_menu_about"
+        android:title="@string/botnav_menu_teams"
         app:showAsAction="never"
-        android:icon="@drawable/nav_about"
-        /><item
+        android:icon="@drawable/nav_team"
+        />
+    <item
         android:id="@+id/nav_notifications"
         android:orderInCategory="100"
         android:title="@string/botnav_menu_notifications"

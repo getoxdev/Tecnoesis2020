@@ -38,8 +38,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
 
-
-
 //    butterknife : for view binding
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
@@ -85,8 +83,7 @@ dependencies {
 
     implementation 'android.arch.paging:runtime:1.0.1'
 
-
-
+    implementation 'com.airbnb.android:lottie:2.8.0'
 
 
 }

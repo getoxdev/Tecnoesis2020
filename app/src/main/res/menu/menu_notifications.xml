@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.github.tenx.tecnoesis20.ui.main.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_about"
         android:orderInCategory="100"
-        android:title="@string/botnav_menu_teams"
-        app:showAsAction="never" />
+        android:title="@string/botnav_menu_about"
+        app:showAsAction="collapseActionView"
+        android:icon="@drawable/nav_about"
+        />
 </menu>

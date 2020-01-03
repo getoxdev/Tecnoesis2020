@@ -1,4 +1,4 @@
-package com.github.tenx.tecnoesis20.ui.main.about.models;
+package com.github.tenx.tecnoesis20.ui.main.teams.models;
 
 public abstract class BaseItem {
     public abstract int getType();

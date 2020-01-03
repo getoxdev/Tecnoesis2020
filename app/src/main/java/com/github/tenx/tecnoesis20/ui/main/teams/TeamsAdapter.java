@@ -1,10 +1,9 @@
-package com.github.tenx.tecnoesis20.ui.main.about;
+package com.github.tenx.tecnoesis20.ui.main.teams;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.data.models.TeamBody;
-import com.github.tenx.tecnoesis20.ui.main.about.models.BaseItem;
-import com.github.tenx.tecnoesis20.ui.main.about.models.HeaderItem;
-import com.github.tenx.tecnoesis20.ui.main.about.models.MemberItem;
+import com.github.tenx.tecnoesis20.ui.main.teams.models.BaseItem;
+import com.github.tenx.tecnoesis20.ui.main.teams.models.HeaderItem;
+import com.github.tenx.tecnoesis20.ui.main.teams.models.MemberItem;
 
 import java.util.ArrayList;
 import java.util.List;

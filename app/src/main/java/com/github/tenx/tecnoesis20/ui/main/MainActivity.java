@@ -6,18 +6,12 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import com.github.tenx.tecnoesis20.R;
-import com.github.tenx.tecnoesis20.ui.main.about.AboutFragment;
-import com.github.tenx.tecnoesis20.ui.main.events.EventsFragment;
 import com.github.tenx.tecnoesis20.ui.main.home.HomeFragment;
-import com.github.tenx.tecnoesis20.ui.main.notifications.NotificationsFragment;
-import com.github.tenx.tecnoesis20.ui.main.schedule.ScheduleFragment;
 import com.github.tenx.tecnoesis20.ui.module.ModuleActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -82,32 +76,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
     protected void onStart() {
         super.onStart();
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
     //    handle bottom navigation clicks
@@ -115,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
         int colorID;
-        int index = 0;
+        int index;
 
         switch (id) {
             case R.id.nav_home:
@@ -130,9 +103,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 index = FragmentAdapter.INDEX_LOCATION;
                 colorID = R.color.nav_schedule;
                 break;
-            case R.id.nav_about:
-                index = FragmentAdapter.INDEX_ABOUT;
-                colorID = R.color.nav_about;
+            case R.id.nav_teams:
+                index = FragmentAdapter.INDEX_TEAMS;
+                colorID = R.color.nav_teams;
                 break;
             case R.id.nav_notifications:
                 index = FragmentAdapter.INDEX_NOTIFICATIONS;
@@ -182,8 +155,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     menu_id = R.id.nav_events;
                 else if(position == FragmentAdapter.INDEX_LOCATION)
                     menu_id = R.id.nav_location;
-                else if(position == FragmentAdapter.INDEX_ABOUT)
-                    menu_id = R.id.nav_about;
+                else if(position == FragmentAdapter.INDEX_TEAMS)
+                    menu_id = R.id.nav_teams;
                 else if(position == FragmentAdapter.INDEX_NOTIFICATIONS)
                     menu_id = R.id.nav_notifications;
                 else

@@ -3,8 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/sky"
     tools:context=".ui.main.notifications.NotificationsFragment">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_notifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/nav_notifications"
+            app:title="@string/botnav_menu_notifications"
+            app:titleTextColor="@color/md_grey_100"
+            >
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <com.victor.loading.newton.NewtonCradleLoading
         android:id="@+id/progress"
@@ -16,9 +33,10 @@
     </com.victor.loading.newton.NewtonCradleLoading>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/appbar"
         android:id="@+id/recycler_notifications_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_padding_size_small"
         android:layout_marginEnd="@dimen/margin_padding_size_small"
         tools:listitem="@layout/listitem_notifications_body"

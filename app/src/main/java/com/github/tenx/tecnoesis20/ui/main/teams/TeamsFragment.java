@@ -1,4 +1,4 @@
-package com.github.tenx.tecnoesis20.ui.main.about;
+package com.github.tenx.tecnoesis20.ui.main.teams;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,18 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.tenx.tecnoesis20.R;
-import com.github.tenx.tecnoesis20.data.models.TeamBody;
 import com.github.tenx.tecnoesis20.ui.main.MainActivity;
 import com.github.tenx.tecnoesis20.ui.main.MainViewModel;
 import com.victor.loading.newton.NewtonCradleLoading;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AboutFragment extends Fragment {
+public class TeamsFragment extends Fragment {
 
 
     @BindView(R.id.recycler_teams)
@@ -39,14 +35,14 @@ public class AboutFragment extends Fragment {
     private MainViewModel parentViewModel;
 
 
-    public static AboutFragment newInstance() {
-        return new AboutFragment();
+    public static TeamsFragment newInstance() {
+        return new TeamsFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_about, container, false);
+        View v = inflater.inflate(R.layout.fragment_teams, container, false);
         ButterKnife.bind(this, v);
 
 

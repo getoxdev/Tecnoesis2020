@@ -1,4 +1,4 @@
-package com.github.tenx.tecnoesis20.ui.main.about;
+package com.github.tenx.tecnoesis20.ui.main.teams;
 
 import android.content.Context;
 import android.view.LayoutInflater;

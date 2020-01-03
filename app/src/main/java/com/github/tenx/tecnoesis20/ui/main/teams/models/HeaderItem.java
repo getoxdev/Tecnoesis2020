@@ -1,6 +1,6 @@
-package com.github.tenx.tecnoesis20.ui.main.about.models;
+package com.github.tenx.tecnoesis20.ui.main.teams.models;
 
-import com.github.tenx.tecnoesis20.ui.main.about.TeamsAdapter;
+import com.github.tenx.tecnoesis20.ui.main.teams.TeamsAdapter;
 
 public class HeaderItem  extends BaseItem{
 
