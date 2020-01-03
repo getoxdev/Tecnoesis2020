@@ -42,10 +42,11 @@ public class FeedAdapter extends FirebaseRecyclerPagingAdapter<FeedBody, FeedAda
     protected void onBindViewHolder(@NonNull CustomViewHolder holder, int position, @NonNull FeedBody model) {
 
         holder.tvFeedText.setText(model.getText());
-        Glide.with(context).load(model.getImage()).placeholder(R.drawable.placeholder_image).into(holder.ivFeedImage);
+        if(model.getDate() != null){
+            holder.tvFeedDate.setText(model.getDate());
+        }
 
-        LayoutInflater inflater;
-        ViewGroup root;
+        Glide.with(context).load(model.getImage()).placeholder(R.drawable.placeholder_image).into(holder.ivFeedImage);
         holder.ivFeedImage.setOnClickListener(v -> {
             overlayView  = LayoutInflater.from(context).inflate(R.layout.overlay_image, null, false);
 
@@ -85,6 +86,9 @@ public class FeedAdapter extends FirebaseRecyclerPagingAdapter<FeedBody, FeedAda
         ImageView ivFeedImage;
         @BindView(R.id.tv_feed_text)
         TextView tvFeedText;
+
+        @BindView(R.id.tv_feed_date)
+        TextView tvFeedDate;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);

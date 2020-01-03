@@ -18,6 +18,16 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             tools:src="@drawable/sky"
+            android:layout_marginBottom="@dimen/margin_padding_size_small"
+            />
+
+        <TextView
+            android:id="@+id/tv_feed_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="23 oct 2:00pm"
+            android:textColor="@color/md_grey_400"
+            android:layout_marginStart="@dimen/margin_padding_size_medium"
             />
         <com.github.tenx.tecnoesis20.views.ExpandableTextView
             android:id="@+id/tv_feed_text"
@@ -26,7 +36,8 @@
             tools:text="@string/lorem_180"
             android:textColor="@color/md_grey_100"
             android:maxLines="4"
-            android:padding="@dimen/margin_padding_size_medium"
+            android:paddingStart="@dimen/margin_padding_size_medium"
+            android:paddingEnd="@dimen/margin_padding_size_medium"
             android:linksClickable="true"
             android:autoLink="web"
             android:textColorLink="@color/md_blue_600"
