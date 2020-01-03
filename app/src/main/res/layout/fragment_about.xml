@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:backgroundTint="@color/colorPrimary"
-            android:text="Privacy"
+            android:text="Privacy Policy"
             app:icon="@drawable/ic_websiite"
             android:layout_marginStart="@dimen/margin_padding_size_medium"
             />

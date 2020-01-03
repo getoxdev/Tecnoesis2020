@@ -152,6 +152,7 @@ public class NotificationsFragment extends Fragment {
     private void initToolbar(Context context){
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbarNotifications);
 
+
     }
 
     private void showProgress() {
