@@ -19,22 +19,25 @@
         >
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_contact_dev"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:backgroundTint="@color/colorPrimary"
             android:text="Contact Developer"
             app:icon="@drawable/ic_email"
-            android:layout_marginStart="@dimen/margin_padding_size_medium"
+            android:layout_marginStart="@dimen/margin_padding_size_xxlarge"
+            android:layout_marginEnd="@dimen/margin_padding_size_xxlarge"
             />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_privacy_policy"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:backgroundTint="@color/colorPrimary"
             android:text="Privacy Policy"
             app:icon="@drawable/ic_websiite"
-            android:layout_marginStart="@dimen/margin_padding_size_medium"
+            android:layout_marginStart="@dimen/margin_padding_size_xxlarge"
+            android:layout_marginEnd="@dimen/margin_padding_size_xxlarge"
+
             />
 
     </LinearLayout>

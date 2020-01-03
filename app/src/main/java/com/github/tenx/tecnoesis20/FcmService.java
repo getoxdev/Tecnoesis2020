@@ -61,7 +61,7 @@ public class FcmService extends FirebaseMessagingService {
         android.app.Notification.Builder mBuilder = new android.app.Notification.Builder(mContext);
         mBuilder.setSmallIcon(R.mipmap.ic_launcher);
         mBuilder.setContentTitle(title)
-                .setSmallIcon(R.drawable.icon)
+                .setSmallIcon(R.drawable.logo_notification)
                 .setContentText(message)
                 .setAutoCancel(false)
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)

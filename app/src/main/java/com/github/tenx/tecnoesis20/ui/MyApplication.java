@@ -28,6 +28,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+
+
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
                 .setProgressiveJpegConfig(new SimpleProgressiveJpegConfig())
                 .setResizeAndRotateEnabledForNetwork(true)
