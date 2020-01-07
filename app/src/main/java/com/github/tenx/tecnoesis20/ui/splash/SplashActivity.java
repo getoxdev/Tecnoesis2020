@@ -20,6 +20,7 @@ import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.OnFailureListener;
 import com.google.android.play.core.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.victor.loading.newton.NewtonCradleLoading;
@@ -28,7 +29,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class SplashActivity extends AppCompatActivity implements InstallStateUpdatedListener {
+import static com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE;
+
+public class SplashActivity extends AppCompatActivity{
 
     @BindView(R.id.act_splash_mbtn_next)
     MaterialButton mbtnNext;
@@ -53,6 +56,7 @@ public class SplashActivity extends AppCompatActivity implements InstallStateUpd
 //            go to next screen
             showProgress();
             FirebaseMessaging.getInstance().subscribeToTopic("user").addOnCompleteListener(task -> {
+                        Timber.d("Subscribed to `user` topic");
                         checkUpdates(() -> moveToActivity(MainActivity.class));
 
             });
@@ -79,15 +83,14 @@ public class SplashActivity extends AppCompatActivity implements InstallStateUpd
     }
 
 
-    @Override
-    public void onStateUpdate(InstallState state) {
-        if (state.installStatus() == InstallStatus.DOWNLOADED) {
-            // After the update is downloaded, show a notification
-            // and request user confirmation to restart the app.
-            popupSnackbarForCompleteUpdate();
-        }
-
-    }
+//    @Override
+//    public void onStateUpdate(InstallState state) {
+//        if (state.installStatus() == InstallStatus.DOWNLOADED) {
+//            // After the update is downloaded, show a notification
+//            // and request user confirmation to restart the app.
+//            popupSnackbarForCompleteUpdate();
+//        }
+//    }
 
     @Override
     protected void onResume() {
@@ -102,31 +105,52 @@ public class SplashActivity extends AppCompatActivity implements InstallStateUpd
                     if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
                         popupSnackbarForCompleteUpdate();
                     }
-                });
 
+                    if (appUpdateInfo.updateAvailability()
+                            == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                        // If an in-app update is already running, resume the update.
+                        try {
+                            appUpdateManager.startUpdateFlowForResult(
+                                    appUpdateInfo,
+                                    IMMEDIATE,
+                                    this,
+                                    APP_UPDATE_REQUEST_CODE);
+                        } catch (IntentSender.SendIntentException e) {
+                            e.printStackTrace();
+                            hideProgress();
+                        }
+                    }
+                });
     }
 
     private void checkUpdates(TaskHelper callback){
         // Creates instance of the manager.
 // Returns an intent object that you use to check for an update.
         Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
-
 // Checks that the platform will allow the specified type of update.
         appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
                     // For a flexible update, use AppUpdateType.FLEXIBLE
-                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                    && appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE)) {
+
+
+                Timber.d("Has update");
                 // Request the update.
                 try {
-                    appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.FLEXIBLE, SplashActivity.this , APP_UPDATE_REQUEST_CODE);
+                    appUpdateManager.startUpdateFlowForResult(appUpdateInfo, IMMEDIATE, SplashActivity.this , APP_UPDATE_REQUEST_CODE);
                 }catch (IntentSender.SendIntentException e){
                     Timber.e("Error sending intent : %s",e.getMessage());
                     callback.onComplete();
                 }
 
             }else {
+                Timber.d("No update available");
                 callback.onComplete();
+
             }
+        }).addOnFailureListener(e -> {
+            Timber.d("Failed to get app info : %s " , e.getMessage());
+            callback.onComplete();
         });
 
     }
@@ -137,13 +161,14 @@ public class SplashActivity extends AppCompatActivity implements InstallStateUpd
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == APP_UPDATE_REQUEST_CODE){
-            if(resultCode == RESULT_OK)
-               popupSnackbarForCompleteUpdate();
+
+            if(resultCode == RESULT_OK){
+                Timber.d("User accepted update");
+            }
             else if(resultCode == RESULT_CANCELED)
                 moveToActivity(MainActivity.class);
             else
                 checkUpdates(() -> moveToActivity(MainActivity.class));
-
         }
     }
 

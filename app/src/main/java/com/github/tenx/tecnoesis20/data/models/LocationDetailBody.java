@@ -18,12 +18,26 @@ public class LocationDetailBody {
     @PropertyName("image")
     String image;
 
+
+    @PropertyName("marker")
+    String marker;
+
+
+
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getMarker() {
+        return marker;
+    }
+
+    public void setMarker(String marker) {
+        this.marker = marker;
     }
 
     @PropertyName("HomeEventBody")
