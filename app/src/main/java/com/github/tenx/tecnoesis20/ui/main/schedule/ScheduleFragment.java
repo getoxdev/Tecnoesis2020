@@ -24,7 +24,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.data.models.LocationDetailBody;
@@ -41,6 +40,8 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.HashMap;
 import java.util.List;
@@ -150,12 +151,14 @@ public class ScheduleFragment extends Fragment implements OnMapReadyCallback {
             markerIdRecord.put(tempMarker.getId(), tempMarker);
 
             Timber.d("image url : "+data.getMarker());
-            Glide.with(context).asBitmap().load(data.getMarker()).into(new SimpleTarget<Bitmap>() {
-                @Override
-                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                    tempMarker.setIcon(getBitmapDescriptorFromBitmap(resource));
-                }
-            });
+           Glide.with(context).asBitmap().load(data.getMarker()).into(new SimpleTarget<Bitmap>() {
+               @Override
+               public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        tempMarker.setIcon(getBitmapDescriptorFromBitmap(resource));
+               }
+           });
+
+
 
         }
 
@@ -184,8 +187,8 @@ public class ScheduleFragment extends Fragment implements OnMapReadyCallback {
 
 
     private BitmapDescriptor getBitMapFromDrawable(int id) {
-        int height = 150;
-        int width = 150;
+        int height = 120;
+        int width = 120;
         Bitmap b = BitmapFactory.decodeResource(getResources(), id);
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
         BitmapDescriptor smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);

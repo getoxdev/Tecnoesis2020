@@ -186,7 +186,9 @@ public class HomeFragment extends Fragment {
                 .build();
 
         feedAdapter = new FeedAdapter(options, context);
-        recyclerHomeFeeds.setLayoutManager(new LinearLayoutManager(context));
+        LinearLayoutManager lm = new LinearLayoutManager(context);
+        lm.setReverseLayout(true);
+        recyclerHomeFeeds.setLayoutManager(lm);
         recyclerHomeFeeds.setAdapter(feedAdapter);
     }
 
