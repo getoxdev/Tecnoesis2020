@@ -19,9 +19,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="MODULE"
+            tools:text="MODULE"
             android:textColor="@color/md_grey_100"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/lora_bold_italic"
             android:textSize="@dimen/text_size_xlarge"/>
 
             <LinearLayout
