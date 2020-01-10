@@ -245,34 +245,7 @@ public class MainViewModel  extends AndroidViewModel {
         });
     }
 
-//    public void loadFeedsData(){
-//
-//        db.getReference().child("feeds").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//
-//                Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
-//                List<FeedBody> temp = new ArrayList<>();
-//                while (iterator.hasNext()){
-//
-//                    DataSnapshot snap = iterator.next();
-//
-//                    FeedBody data = snap.getValue(FeedBody.class);
-//                    temp.add(data);
-//                }
-//
-////                    post update to activity
-//                ldFeedList.postValue(temp);
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+
 
     public MutableLiveData<List<TeamBody>> getLdTeamsList() {
         return ldTeamsList;

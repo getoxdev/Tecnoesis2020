@@ -8,11 +8,11 @@
     tools:context=".ui.main.MainActivity"
     android:orientation="vertical"
     tools:showIn="@layout/activity_main">
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vp_main_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.viewpager.widget.ViewPager>
+       <FrameLayout
+           android:id="@+id/fl_main_frame_container"
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_weight="1">
+       </FrameLayout>
 
 </LinearLayout>
