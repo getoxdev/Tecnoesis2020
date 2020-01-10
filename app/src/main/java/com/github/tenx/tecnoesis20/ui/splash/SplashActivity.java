@@ -3,6 +3,7 @@ package com.github.tenx.tecnoesis20.ui.splash;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.victor.loading.newton.NewtonCradleLoading;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE;
 
@@ -43,6 +45,12 @@ public class SplashActivity extends AppCompatActivity{
     private AppUpdateManager appUpdateManager;
 
     private static final int APP_UPDATE_REQUEST_CODE = 112;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -33,18 +33,17 @@
         android:id="@+id/tv_theme_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/act_spash_theme_text"
-        android:textColor="@color/md_grey_100"
-        android:textSize="@dimen/text_size_large"
-        android:fontFamily="@font/lora_bold"
         android:layout_centerInParent="true"
-        android:textAllCaps="true"
         android:layout_marginStart="@dimen/margin_padding_size_medium"
         android:layout_marginEnd="@dimen/margin_padding_size_medium"
-
+        android:fontFamily="@fonts/lora_bold"
+        android:text="@string/act_spash_theme_text"
         android:textAlignment="center"
-        android:textStyle="bold"
-        />
+        android:textAllCaps="true"
+        android:textColor="@color/md_grey_100"
+
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold" />
 
 
 

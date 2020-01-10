@@ -27,6 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ModuleActivity extends AppCompatActivity implements EventClickHandler {
 
@@ -58,6 +59,13 @@ public class ModuleActivity extends AppCompatActivity implements EventClickHandl
 
 
     private ArrayList<Fragment> listFragments;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

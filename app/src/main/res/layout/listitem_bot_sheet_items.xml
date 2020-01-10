@@ -30,7 +30,7 @@
             tools:text="Event 1"
             android:textAllCaps="true"
             android:textSize="@dimen/text_size_medium"
-            android:fontFamily="@font/lora_bold"
+            android:fontFamily="@fonts/lora_bold"
             android:layout_marginStart="@dimen/margin_padding_size_medium"
             android:layout_marginEnd="@dimen/margin_padding_size_medium"
             android:textColor="@color/md_purple_700"
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="12 oct Sunday, New Gallery"
-            android:fontFamily="@font/lora_regular"
+            android:fontFamily="@fonts/lora_regular"
             android:layout_marginStart="@dimen/margin_padding_size_medium"
             android:layout_marginEnd="@dimen/margin_padding_size_medium"
             />

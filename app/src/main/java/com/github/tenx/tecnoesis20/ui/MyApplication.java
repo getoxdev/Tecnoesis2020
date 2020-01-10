@@ -2,12 +2,11 @@ package com.github.tenx.tecnoesis20.ui;
 
 import android.app.Application;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
 import com.github.tenx.tecnoesis20.BuildConfig;
+import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.data.AppDataManager;
 import com.github.tenx.tecnoesis20.data.models.ModuleBody;
 import com.github.tenx.tecnoesis20.data.rest.events.AppEventHelper;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import timber.log.Timber;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class MyApplication extends Application {
 
@@ -28,6 +28,10 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+        .setDefaultFontPath("fonts/roboto_regular.ttf")
+        .setFontAttrId(R.attr.fontPath).build());
 
 
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)

@@ -44,7 +44,7 @@
             android:paddingEnd="@dimen/margin_padding_size_medium"
             android:background="@color/bg_card_85_opac_black"
             android:textColor="@color/md_grey_50"
-            android:fontFamily="@font/lora_bold"
+            android:fontFamily="@fonts/lora_bold"
             android:textSize="@dimen/text_size_xlarge"
             />
         <com.google.android.material.button.MaterialButton
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lorem_30"
-            android:fontFamily="@font/lora_regular"
+            android:fontFamily="@fonts/lora_regular"
             android:padding="@dimen/margin_padding_size_medium"
             android:textSize="@dimen/text_size_medium"
             android:textColor="@color/md_grey_100"

@@ -58,20 +58,22 @@
                 android:background="@color/bg_card_50_opac_black"
                 android:layout_marginBottom="@dimen/margin_padding_size_small"
                 >
+
                 <TextView
+                    android:id="@+id/tv_home_sponsors"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_home_sponsors"
-                    android:text="OUR PARTNERS"
+                    android:background="@color/bg_card_50_opac_black"
+                    android:fontFamily="@font/roboto_medium"
                     android:paddingStart="@dimen/margin_padding_size_medium"
-                    android:paddingEnd="@dimen/margin_padding_size_medium"
-                    android:paddingBottom="@dimen/margin_padding_size_small"
                     android:paddingTop="@dimen/margin_padding_size_small"
-                    android:textSize="@dimen/text_size_large"
+                    android:paddingEnd="@dimen/margin_padding_size_medium"
+
+                    android:paddingBottom="@dimen/margin_padding_size_small"
+                    android:text="OUR PARTNERS"
                     android:textColor="@color/md_grey_50"
-                    android:fontFamily="@font/lora_bold"
-                    android:textStyle="bold"
-                    android:background="@color/bg_card_50_opac_black"/>
+                    android:textSize="@dimen/text_size_large"
+                    android:textStyle="bold" />
 
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -106,7 +108,7 @@
                 android:paddingTop="@dimen/margin_padding_size_small"
                 android:textSize="@dimen/text_size_xlarge"
                 android:textColor="@color/md_grey_50"
-                android:fontFamily="@font/lora_bold"
+                android:fontFamily="@fonts/lora_bold"
                 android:textStyle="bold"
                 android:background="@color/bg_card_50_opac_black"
                 />

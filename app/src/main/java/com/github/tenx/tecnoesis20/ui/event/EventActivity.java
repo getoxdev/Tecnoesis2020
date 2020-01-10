@@ -1,5 +1,6 @@
 package com.github.tenx.tecnoesis20.ui.event;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -21,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class EventActivity extends AppCompatActivity {
 
@@ -44,6 +46,12 @@ public class EventActivity extends AppCompatActivity {
 
     private int moduleIndex;
     private int eventIndex;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

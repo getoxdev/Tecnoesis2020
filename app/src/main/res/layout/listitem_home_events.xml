@@ -21,7 +21,7 @@
             android:layout_margin="15dp"
             android:text="MODULE"
             android:textColor="@color/md_grey_100"
-            android:fontFamily="@font/lora_bold"
+            android:fontFamily="@font/roboto_medium"
             android:textSize="@dimen/text_size_xlarge"/>
 
             <LinearLayout
@@ -37,6 +37,7 @@
                     android:layout_height="wrap_content"
                     android:maxHeight="250dp"
                     android:maxWidth="150dp"
+                    android:layout_marginLeft="10dp"
                     android:adjustViewBounds="true"
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitXY"
@@ -47,13 +48,13 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:textColor="@color/md_grey_200"
-                    android:fontFamily="@font/lora_regular"
+                    android:fontFamily="@fonts/lora_regular"
                     android:layout_marginTop="0dp"
                     android:layout_marginLeft="@dimen/margin_padding_size_small"
                     android:layout_marginRight="@dimen/margin_padding_size_small"
                     android:textSize="@dimen/text_size_medium"
                     android:paddingLeft="@dimen/margin_padding_size_small"
-                    android:paddingRight="@dimen/margin_padding_size_small"
+                    android:paddingRight="4dp"
                     android:linksClickable="true"
                     android:autoLink="web"
                     android:textColorLink="@color/md_blue_600"
