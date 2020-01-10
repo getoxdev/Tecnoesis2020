@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import timber.log.Timber;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
 
 public class MyApplication extends Application {
 
@@ -28,10 +28,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-    //    TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/alfa_slab_one.ttf");
-//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-//        .setDefaultFontPath("fonts/roboto_regular.ttf")
-//        .setFontAttrId(R.attr.fontPath).build());
 
 
 

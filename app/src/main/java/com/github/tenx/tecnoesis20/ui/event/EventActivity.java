@@ -22,7 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 public class EventActivity extends AppCompatActivity {
 
@@ -46,11 +46,6 @@ public class EventActivity extends AppCompatActivity {
 
     private int moduleIndex;
     private int eventIndex;
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
 
 
     @Override

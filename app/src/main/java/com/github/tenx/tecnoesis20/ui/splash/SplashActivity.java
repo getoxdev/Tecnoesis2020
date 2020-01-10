@@ -29,7 +29,7 @@ import com.victor.loading.newton.NewtonCradleLoading;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 import static com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE;
 
@@ -46,10 +46,6 @@ public class SplashActivity extends AppCompatActivity{
 
     private static final int APP_UPDATE_REQUEST_CODE = 112;
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
 
 
     @Override
