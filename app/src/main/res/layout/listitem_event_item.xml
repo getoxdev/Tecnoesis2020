@@ -41,9 +41,9 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/md_green_400"
                 android:textSize="@dimen/text_size_large"
-
+                android:fontFamily="@font/roboto_medium"
                 android:text="Jhonny Dep"
-                android:textStyle="bold"
+
                 />
 
             <TextView

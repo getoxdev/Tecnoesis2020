@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private MainViewModel viewModel;
 
     private HomeFragment fragHome;
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+//
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+//    }
 
 
     @Override

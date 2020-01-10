@@ -30,8 +30,8 @@
         android:orientation="vertical"
         android:layout_marginTop="170dp"
         android:background="@color/bg_card_25_opac_black"
-        android:layout_marginStart="@dimen/margin_padding_size_large"
-        android:layout_marginEnd="@dimen/margin_padding_size_large"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
 
 
         >
@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             tools:text="@tools:sample/lorem"
             android:paddingStart="@dimen/margin_padding_size_medium"
+            android:paddingTop="4dp"
             android:paddingEnd="@dimen/margin_padding_size_medium"
             android:background="@color/bg_card_85_opac_black"
             android:textColor="@color/md_grey_50"

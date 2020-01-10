@@ -34,10 +34,10 @@
                 android:orientation="vertical"
                 android:layout_below="@id/iv_event_image"
                 android:background="@color/bg_card_25_opac_black"
-                android:paddingStart="@dimen/margin_padding_size_medium"
-                android:paddingEnd="@dimen/margin_padding_size_medium"
-                android:layout_marginStart="@dimen/margin_padding_size_large"
-                android:layout_marginEnd="@dimen/margin_padding_size_large"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
 
 
                 >

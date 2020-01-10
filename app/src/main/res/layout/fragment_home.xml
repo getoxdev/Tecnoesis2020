@@ -64,16 +64,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/bg_card_50_opac_black"
-                    android:fontFamily="@font/roboto_medium"
                     android:paddingStart="@dimen/margin_padding_size_medium"
                     android:paddingTop="@dimen/margin_padding_size_small"
                     android:paddingEnd="@dimen/margin_padding_size_medium"
-
+                    android:fontFamily="@font/roboto_medium"
                     android:paddingBottom="@dimen/margin_padding_size_small"
                     android:text="OUR PARTNERS"
                     android:textColor="@color/md_grey_50"
                     android:textSize="@dimen/text_size_large"
-                    android:textStyle="bold" />
+                    />
 
 
                 <androidx.recyclerview.widget.RecyclerView
