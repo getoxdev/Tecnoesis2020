@@ -67,7 +67,7 @@
                     android:paddingStart="@dimen/margin_padding_size_medium"
                     android:paddingTop="@dimen/margin_padding_size_small"
                     android:paddingEnd="@dimen/margin_padding_size_medium"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/lora_bold"
                     android:paddingBottom="@dimen/margin_padding_size_small"
                     android:text="OUR PARTNERS"
                     android:textColor="@color/md_grey_50"
@@ -107,7 +107,7 @@
                 android:paddingTop="@dimen/margin_padding_size_small"
                 android:textSize="@dimen/text_size_xlarge"
                 android:textColor="@color/md_grey_50"
-                android:fontFamily="@fonts/lora_bold"
+                android:fontFamily="@font/lora_bold"
                 android:textStyle="bold"
                 android:background="@color/bg_card_50_opac_black"
                 />

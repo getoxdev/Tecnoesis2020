@@ -21,7 +21,8 @@
             android:layout_margin="15dp"
             tools:text="MODULE"
             android:textColor="@color/md_grey_100"
-            android:fontFamily="@font/lora_bold_italic"
+            android:fontFamily="@font/lora_bold"
+            android:textAllCaps="true"
             android:textSize="@dimen/text_size_xlarge"/>
 
             <LinearLayout

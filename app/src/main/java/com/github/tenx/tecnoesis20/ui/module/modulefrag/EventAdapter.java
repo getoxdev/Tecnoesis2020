@@ -2,6 +2,7 @@ package com.github.tenx.tecnoesis20.ui.module.modulefrag;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.data.models.EventBody;
@@ -76,9 +82,24 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             CustomHeaderViewHolder headerHolder = (CustomHeaderViewHolder) holder;
 
+
+
             headerHolder.tvModuleDescription.setText(moduleBody.getDescription());
             headerHolder.tvModuleName.setText(moduleBody.getName());
-            Glide.with(context).load(moduleBody.getImage()).into(headerHolder.ivModuleImage);
+            Glide.with(context).load(moduleBody.getImage()).listener(new RequestListener<Drawable>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+
+                    headerHolder.ivModuleImage.setVisibility(View.GONE);
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    headerHolder.tvModuleName.setVisibility(View.GONE);
+                    return false;
+                }
+            }).into(headerHolder.ivModuleImage);
             headerHolder.btnWebsite.setOnClickListener(v-> {
                 openUrl(moduleBody.getWebsite(), context);
             });

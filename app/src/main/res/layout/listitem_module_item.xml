@@ -26,8 +26,8 @@
             android:paddingBottom="@dimen/margin_padding_size_small"
             android:textColor="@color/md_grey_50"
             android:background="@color/bg_card_50_opac_black"
-            android:fontFamily="@fonts/lora_bold"
-            android:textSize="@dimen/text_size_xlarge"
+            android:fontFamily="@font/lora_bold"
+            android:textSize="@dimen/text_size_large"
             />
 
         <ImageView
