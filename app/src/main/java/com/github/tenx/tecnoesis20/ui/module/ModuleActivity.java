@@ -28,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
+
 public class ModuleActivity extends AppCompatActivity implements EventClickHandler {
 
 
@@ -58,6 +59,9 @@ public class ModuleActivity extends AppCompatActivity implements EventClickHandl
 
 
     private ArrayList<Fragment> listFragments;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

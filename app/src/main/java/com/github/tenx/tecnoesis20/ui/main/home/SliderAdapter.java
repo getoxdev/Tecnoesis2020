@@ -8,9 +8,12 @@ package com.github.tenx.tecnoesis20.ui.main.home;
         import android.widget.TextView;
 
         import com.bumptech.glide.Glide;
+        import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
         import com.github.tenx.tecnoesis20.R;
         import com.smarteist.autoimageslider.SliderViewAdapter;
+        import com.stfalcon.frescoimageviewer.ImageViewer;
 
+        import java.util.ArrayList;
         import java.util.List;
 
 public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapterVH> {
@@ -39,7 +42,15 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
         String currentImage = imageUrls.get(position);
 
         Glide.with(context).load(currentImage).placeholder(R.drawable.placeholder_image).into(viewHolder.imageViewBackground);
-
+        viewHolder.imageViewBackground.setOnClickListener(v -> {
+            GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(context.getResources())
+                    .setFailureImage(R.drawable.placeholder_image)
+                    .setProgressBarImage(R.drawable.placeholder_image)
+                    .setPlaceholderImage(R.drawable.placeholder_image);
+            new ImageViewer.Builder(context, imageUrls)
+                    .setStartPosition(position).setCustomDraweeHierarchyBuilder(hierarchyBuilder)
+                    .show();
+        });
     }
 
     @Override

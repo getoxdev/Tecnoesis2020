@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -20,6 +21,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.transition.Transition;
 import com.github.tenx.tecnoesis20.R;
 import com.github.tenx.tecnoesis20.data.models.LocationDetailBody;
 import com.github.tenx.tecnoesis20.ui.main.MainActivity;
@@ -35,6 +40,8 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.HashMap;
 import java.util.List;
@@ -104,7 +111,7 @@ public class ScheduleFragment extends Fragment implements OnMapReadyCallback {
         initBottomSheet(getActivity());
         parentViewModel.getLdLocationDetailsList().observe(getActivity(), data -> {
             if(map != null){
-                initMapData(data);
+                initMapData(data, getActivity());
             }
         });
     }
@@ -126,42 +133,73 @@ public class ScheduleFragment extends Fragment implements OnMapReadyCallback {
             Timber.e("Can't find style. Error:");
         }
         LatLng nitCords = new LatLng(24.7577, 92.7923);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(nitCords, 15.0f));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(nitCords, 16.0f));
     }
 
-    private void initMapData(List<LocationDetailBody> locationData){
+    private void initMapData(List<LocationDetailBody> locationData, Context context){
         map.clear();
         markerIdRecord.clear();
         markerRecord.clear();
         for (int i=0 ; i< locationData.size() ; i++) {
             LocationDetailBody data = locationData.get(i);
-            LatLng cords = new LatLng(Double.parseDouble(data.getLat()), Double.parseDouble(data.getLng()));
+            LatLng cords = new LatLng(data.getLat(), data.getLng());
 
             MarkerOptions opts = new MarkerOptions().position(cords).title(data.getName());
-            opts.icon(getBitmap(R.drawable.ic_marker_purple));
+            opts.icon(getBitMapFromDrawable(R.drawable.ic_marker_purple));
             Marker tempMarker = map.addMarker(opts);
             markerRecord.put(tempMarker.getId(), i);
             markerIdRecord.put(tempMarker.getId(), tempMarker);
+
+            Timber.d("image url : "+data.getMarker());
+           Glide.with(context).asBitmap().load(data.getMarker()).into(new SimpleTarget<Bitmap>() {
+               @Override
+               public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        tempMarker.setIcon(getBitmapDescriptorFromBitmap(resource));
+               }
+           });
+
+
+
         }
 
         map.setOnMarkerClickListener(marker1 -> {
+            if (marker1.isInfoWindowShown()) {
+                marker1.hideInfoWindow();
+            } else {
+                marker1.showInfoWindow();
+            }
+
             try {
-                initBottomSheetData(locationData.get(markerRecord.get(marker1.getId())) , getActivity());
+               new Handler().postDelayed(new Runnable() {
+                   @Override
+                   public void run() {
+                       initBottomSheetData(locationData.get(markerRecord.get(marker1.getId())) , getActivity());
+                   }
+               },1000);
                 return true;
             }catch (NullPointerException e){
                 Timber.e("Null error occured");
             }
 
-            return false;
+            return true;
         });
     }
 
 
-    private BitmapDescriptor getBitmap(int id) {
-        int height = 100;
-        int width = 100;
+    private BitmapDescriptor getBitMapFromDrawable(int id) {
+        int height = 120;
+        int width = 120;
         Bitmap b = BitmapFactory.decodeResource(getResources(), id);
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        BitmapDescriptor smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
+
+        return smallMarkerIcon;
+    }
+
+    private BitmapDescriptor getBitmapDescriptorFromBitmap(Bitmap bitmap) {
+        int height = 150;
+        int width = 150;
+        Bitmap smallMarker = Bitmap.createScaledBitmap(bitmap, width, height, false);
         BitmapDescriptor smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker);
 
         return smallMarkerIcon;

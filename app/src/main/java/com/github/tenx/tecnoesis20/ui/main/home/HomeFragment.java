@@ -12,12 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.paging.DatabasePagingOptions;
 import com.github.tenx.tecnoesis20.R;
+import com.github.tenx.tecnoesis20.data.models.FeedBody;
 import com.github.tenx.tecnoesis20.ui.main.MainActivity;
 import com.github.tenx.tecnoesis20.ui.main.MainViewModel;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -31,6 +36,10 @@ public class HomeFragment extends Fragment {
     NewtonCradleLoading progressLoading;
     @BindView(R.id.ll_main_content)
     LinearLayout llMainContent;
+    @BindView(R.id.recycler_home_feeds)
+    RecyclerView recyclerHomeFeeds;
+    @BindView(R.id.ll_home_sponsors_container)
+    LinearLayout llHomeSponsorsContainer;
 
 //    google fragment lifecycle or https://developer.android.com/guide/components/fragments if you are unsure about how to use fragment lifecycle
 
@@ -51,6 +60,7 @@ public class HomeFragment extends Fragment {
     private SliderAdapter homeSliderAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private SponsorsAdapter sponsorsAdapter;
+    private FeedAdapter feedAdapter;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -61,10 +71,10 @@ public class HomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View parent = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, parent);
-
         initModuleRecycler();
         initSlider();
         initSponsorsRecycler();
+        initFeedsRecycler(getActivity());
         return parent;
 
     }
@@ -80,18 +90,31 @@ public class HomeFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        feedAdapter.stopListening();
+    }
+
     @Override
     public void onStart() {
         super.onStart();
 
 //        @TODO how to call view model demo
+        feedAdapter.startListening();
 
         parentViewModel.getLdPagerImageList().observe(getActivity(), data -> {
             homeSliderAdapter.setImageUrls(data);
         });
 
         parentViewModel.getLdSponsorImageList().observe(getActivity(), data -> {
-            sponsorsAdapter.setHlist(data);
+                if(!data.isEmpty()){
+                    llHomeSponsorsContainer.setVisibility(View.VISIBLE);
+                    sponsorsAdapter.setHlist(data);
+                }else {
+                    llHomeSponsorsContainer.setVisibility(View.GONE);
+                }
         });
 
 
@@ -100,10 +123,10 @@ public class HomeFragment extends Fragment {
         });
 
         parentViewModel.getIsMainContentLoaded().observe(getActivity(), isLoaded -> {
-                        if(isLoaded)
-                            hideProress();
-                        else
-                            showProgress();
+            if (isLoaded)
+                hideProress();
+            else
+                showProgress();
         });
     }
 
@@ -114,11 +137,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void initModuleRecycler() {
-//        events=new ArrayList<>();
-//        events.add(new HomeEventBody("MODULES","Tecnoesis 2020 presents before you an amazing and alluring blende of HomeEventBody and modules. Dive straight into the world of techies and ignite the innovative genius within you. Particapate in workshops to discover exciting new topics.",R.drawable.digital));
-//        events.add(new HomeEventBody("NITS HACKS 3.0","It is all about providing the fanatics with the flavour of the emerging technical aspects of many real life applications. With the idea of binding pack of celebrated minds into the same platform, the team will be conducting Hackatons and coding competitions to bring out the best in the tech geeks!",R.drawable.digital));
-//        events.add(new HomeEventBody("SPARK","The coup de grace event of the annual techno-management festivals. Culminating the end of festivities in form of a musical extravaganza, Spark is the spectacle to behold. From edm artists to classical artists, from rock bands to solo singers,the Spark night truly covers the art of production and provides the drive to feature the elite artists of the present generation.",R.drawable.digital));
-//
         layoutManager = new LinearLayoutManager(getActivity());
         mainEventsRecycler.setHasFixedSize(true);
         mainEventsRecycler.setLayoutManager(layoutManager);
@@ -145,6 +163,33 @@ public class HomeFragment extends Fragment {
         sponsorsRecycler.setLayoutManager(layoutManager);
         sponsorsAdapter = new SponsorsAdapter(getActivity());
         sponsorsRecycler.setAdapter(sponsorsAdapter);
+    }
+
+    private void initFeedsRecycler(Context context) {
+
+        Query baseQuery = FirebaseDatabase.getInstance().getReference().child("feeds");
+
+// This configuration comes from the Paging Support Library
+// https://developer.android.com/reference/android/arch/paging/PagedList.Config.html
+
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPrefetchDistance(5)
+                .setPageSize(10)
+                .build();
+
+// The options for the adapter combine the paging configuration with query information
+// and application-specific options for lifecycle, etc.
+        DatabasePagingOptions<FeedBody> options = new DatabasePagingOptions.Builder<FeedBody>()
+                .setLifecycleOwner(this)
+                .setQuery(baseQuery, config, FeedBody.class)
+                .build();
+
+        feedAdapter = new FeedAdapter(options, context);
+        LinearLayoutManager lm = new LinearLayoutManager(context);
+        lm.setReverseLayout(true);
+        recyclerHomeFeeds.setLayoutManager(lm);
+        recyclerHomeFeeds.setAdapter(feedAdapter);
     }
 
 

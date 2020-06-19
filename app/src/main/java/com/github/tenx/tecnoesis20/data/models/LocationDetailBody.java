@@ -7,16 +7,22 @@ import java.util.List;
 public class LocationDetailBody {
 
     @PropertyName("lat")
-    String lat;
+    Double lat;
 
     @PropertyName("lng")
-    String lng;
+    Double lng;
 
     @PropertyName("name")
     String name;
 
     @PropertyName("image")
     String image;
+
+
+    @PropertyName("marker")
+    String marker;
+
+
 
     public String getImage() {
         return image;
@@ -26,38 +32,33 @@ public class LocationDetailBody {
         this.image = image;
     }
 
+    public String getMarker() {
+        return marker;
+    }
+
+    public void setMarker(String marker) {
+        this.marker = marker;
+    }
+
     @PropertyName("HomeEventBody")
     List<MarkerEvent> events;
 
     public LocationDetailBody() {
     }
 
-    public LocationDetailBody(String lat, String lng, String name) {
-        this.lat = lat;
-        this.lng = lng;
-        this.name = name;
-    }
-
-    public LocationDetailBody(String lat, String lng, String name, List<MarkerEvent> events) {
-        this.lat = lat;
-        this.lng = lng;
-        this.name = name;
-        this.events = events;
-    }
-
-    public String getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(String lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
-    public String getLng() {
+    public Double getLng() {
         return lng;
     }
 
-    public void setLng(String lng) {
+    public void setLng(Double lng) {
         this.lng = lng;
     }
 

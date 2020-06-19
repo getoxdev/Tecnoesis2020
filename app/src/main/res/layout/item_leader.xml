@@ -17,7 +17,6 @@
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_splash_temp"
             app:layout_constraintDimensionRatio="H,7:5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

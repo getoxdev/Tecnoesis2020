@@ -1,44 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="wrap_content"
+<com.google.android.material.card.MaterialCardView android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
     xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
-    <ImageView
-        android:id="@+id/iv_home_event_image"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="40dp"
-        android:paddingTop="20dp"
-        android:src="@drawable/digital" />
-
-    <TextView
-        android:id="@+id/tv_home_module_title"
-        android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="@dimen/margin_padding_size_small"
+    android:paddingBottom="@dimen/margin_padding_size_medium"
+    app:cardBackgroundColor="@color/bg_card_50_opac_black">
+    <RelativeLayout android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-           android:text="MODULE"
-        android:fontFamily="@font/lora_bold_italic"
-        android:textColor="@color/md_white_1000"
-        android:textSize="@dimen/text_size_xlarge"
-        android:textStyle="italic" />
+        android:paddingBottom="@dimen/margin_padding_size_medium"
+        >
 
-    <TextView
-        android:id="@+id/tv_home_description"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_home_module_title"
-        android:layout_alignParentStart="true"
-        android:fontFamily="@font/lora_regular"
-        android:textColor="@color/md_purple_100"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="@dimen/margin_padding_size_small"
-        android:layout_marginRight="@dimen/margin_padding_size_small"
-        android:textSize="@dimen/text_size_medium"
-        android:paddingLeft="@dimen/margin_padding_size_small"
-        android:paddingRight="@dimen/margin_padding_size_small"
-        android:text="Tecnoesis 2020 presents before you an amazing and alluring blende of events and modules. Dive straight into the world of techies and ignite the innovative genius within you. Particapate in workshops to discover exciting new topics."/>
-</RelativeLayout>
 
+
+        <TextView
+            android:id="@+id/tv_home_module_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            tools:text="MODULE"
+            android:textColor="@color/md_grey_100"
+            android:fontFamily="@font/lora_bold"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_size_xlarge"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ll1"
+                android:orientation="horizontal"
+                android:layout_below="@id/tv_home_module_title"
+                >
+                <ImageView
+                    android:id="@+id/iv_home_event_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="250dp"
+                    android:maxWidth="150dp"
+                    android:layout_marginLeft="10dp"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    tools:src="@drawable/digital" />
+                <TextView
+                    android:id="@+id/tv_home_description"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/md_grey_200"
+                    android:fontFamily="@fonts/lora_regular"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="@dimen/margin_padding_size_small"
+                    android:layout_marginRight="@dimen/margin_padding_size_small"
+                    android:textSize="@dimen/text_size_medium"
+                    android:paddingLeft="@dimen/margin_padding_size_small"
+                    android:paddingRight="4dp"
+                    android:linksClickable="true"
+                    android:autoLink="web"
+                    android:textColorLink="@color/md_blue_600"
+                    tools:text="Tecnoesis 2020 presents before you an amazing and alluring blende of events and modules. Dive straight into the world of techies and ignite the innovative genius within you. Particapate in workshops to discover exciting new topics."/>
+
+
+
+            </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_home_recycler_website"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_below="@id/ll1"
+            android:layout_marginStart="@dimen/margin_padding_size_medium"
+            android:layout_marginTop="@dimen/margin_padding_size_medium"
+            android:text="Visit Website"
+            app:icon="@drawable/ic_websiite"
+            />
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

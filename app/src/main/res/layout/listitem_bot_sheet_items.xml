@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_star"
         android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/margin_padding_size_medium"
         />
     <LinearLayout
         android:layout_width="0dp"
@@ -29,17 +30,17 @@
             tools:text="Event 1"
             android:textAllCaps="true"
             android:textSize="@dimen/text_size_medium"
-            android:fontFamily="@font/lora_regular"
+            android:fontFamily="@fonts/lora_bold"
             android:layout_marginStart="@dimen/margin_padding_size_medium"
             android:layout_marginEnd="@dimen/margin_padding_size_medium"
-            android:textColor="@color/md_purple_600"
+            android:textColor="@color/md_purple_700"
             />
         <TextView
             android:id="@+id/tv_bot_sheet_event_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="12 oct Sunday, New Gallery"
-            android:fontFamily="@font/lora_regular"
+            android:fontFamily="@fonts/lora_regular"
             android:layout_marginStart="@dimen/margin_padding_size_medium"
             android:layout_marginEnd="@dimen/margin_padding_size_medium"
             />

@@ -50,29 +50,42 @@
                 android:padding="3dp"
                 />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_home_sponsors"
-                android:layout_below="@id/recycler_home_events"
-                android:text="OUR SPONSORS"
-                android:layout_margin="15dp"
-                android:textSize="@dimen/text_size_large"
-                android:textColor="@color/md_white_1000"
-                android:fontFamily="@font/lora_bold"
-                android:textStyle="bold"/>
+                android:orientation="vertical"
+                android:id="@+id/ll_home_sponsors_container"
+                android:background="@color/bg_card_50_opac_black"
+                android:layout_marginBottom="@dimen/margin_padding_size_small"
+                >
+
+                <TextView
+                    android:id="@+id/tv_home_sponsors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_card_50_opac_black"
+                    android:paddingStart="@dimen/margin_padding_size_medium"
+                    android:paddingTop="@dimen/margin_padding_size_small"
+                    android:paddingEnd="@dimen/margin_padding_size_medium"
+                    android:fontFamily="@font/lora_bold"
+                    android:paddingBottom="@dimen/margin_padding_size_small"
+                    android:text="OUR PARTNERS"
+                    android:textColor="@color/md_grey_50"
+                    android:textSize="@dimen/text_size_large"
+                    />
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recycler_sponsors_home_events"
-                android:layout_below="@+id/tv_home_sponsors"
-                android:paddingBottom="3dp"
-                tools:itemCount="2"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycler_sponsors_home_events"
+                    android:layout_below="@+id/tv_home_sponsors"
+                    android:paddingBottom="3dp"
+                    tools:itemCount="2"
 
-                tools:listitem="@layout/home_sponsors_item"
-                />
+                    tools:listitem="@layout/home_sponsors_item"
+                    />
+            </LinearLayout>
 
 
 
@@ -81,6 +94,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/listitem_home_events"
+                android:nestedScrollingEnabled="false"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FEEDS"
+                android:paddingStart="@dimen/margin_padding_size_medium"
+                android:paddingEnd="@dimen/margin_padding_size_medium"
+                android:paddingBottom="@dimen/margin_padding_size_small"
+                android:paddingTop="@dimen/margin_padding_size_small"
+                android:textSize="@dimen/text_size_xlarge"
+                android:textColor="@color/md_grey_50"
+                android:fontFamily="@font/lora_bold"
+                android:textStyle="bold"
+                android:background="@color/bg_card_50_opac_black"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_home_feeds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/listitem_feed"
                 android:nestedScrollingEnabled="false"
                 />
 

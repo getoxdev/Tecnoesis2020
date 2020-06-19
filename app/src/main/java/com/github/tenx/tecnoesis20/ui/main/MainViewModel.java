@@ -7,9 +7,12 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.github.tenx.tecnoesis20.data.models.FeedBody;
 import com.github.tenx.tecnoesis20.data.models.HomeEventBody;
 import com.github.tenx.tecnoesis20.data.models.LocationDetailBody;
 import com.github.tenx.tecnoesis20.data.models.ModuleBody;
+import com.github.tenx.tecnoesis20.data.models.SponsorBody;
+import com.github.tenx.tecnoesis20.data.models.TeamBody;
 import com.github.tenx.tecnoesis20.ui.MyApplication;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,11 +35,11 @@ public class MainViewModel  extends AndroidViewModel {
     private MutableLiveData<Boolean> isModulesLoaded;
     private MyApplication app;
     private FirebaseDatabase db;
-    private MutableLiveData<List<String>> ldSponsorImageList;
+    private MutableLiveData<List<SponsorBody>> ldSponsorImageList;
     private MutableLiveData<List<String>> ldPagerImageList;
     private MutableLiveData<List<HomeEventBody>> ldMainEventList;
+    private MutableLiveData<List<TeamBody>> ldTeamsList;
     private MutableLiveData<Boolean> isMainContentLoaded;
-
 
 
     public MainViewModel(@NonNull Application application)
@@ -51,6 +54,7 @@ public class MainViewModel  extends AndroidViewModel {
         ldPagerImageList = new MutableLiveData<>();
         ldMainEventList = new MutableLiveData<>();
         isMainContentLoaded = new MutableLiveData<>();
+        ldTeamsList = new MutableLiveData<>();
 
     }
 
@@ -64,7 +68,7 @@ public class MainViewModel  extends AndroidViewModel {
         return ldLocationDetailsList;
     }
 
-    public MutableLiveData<List<String>> getLdSponsorImageList() {
+    public MutableLiveData<List<SponsorBody>> getLdSponsorImageList() {
         return ldSponsorImageList;
     }
 
@@ -98,13 +102,13 @@ public class MainViewModel  extends AndroidViewModel {
                         DataSnapshot snap = iterator.next();
 
                         ModuleBody data = snap.getValue(ModuleBody.class);
-                        Timber.d("HomeEventBody : "+data.getEvents().size());
+
 
 
                         temp.add(data);
 
                         if(data.getEvents() != null){
-                            Timber.d("Events size : "+ data.getEvents().size());
+
                         }else {
                             Timber.d("Events is empty!");
                         }
@@ -161,12 +165,12 @@ public class MainViewModel  extends AndroidViewModel {
 
 
                 Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
-                List<String> temp = new ArrayList<>();
+                List<SponsorBody> temp = new ArrayList<>();
                 while (iterator.hasNext()){
 
                     DataSnapshot snap = iterator.next();
 
-                    String data = snap.getValue(String.class);
+                    SponsorBody data = snap.getValue(SponsorBody.class);
                     temp.add(data);
                 }
 
@@ -240,6 +244,44 @@ public class MainViewModel  extends AndroidViewModel {
             }
         });
     }
+
+
+
+    public MutableLiveData<List<TeamBody>> getLdTeamsList() {
+        return ldTeamsList;
+    }
+
+    public void loadTeamsData(){
+
+        db.getReference().child("teams").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
+                List<TeamBody> temp = new ArrayList<>();
+                while (iterator.hasNext()){
+
+                    DataSnapshot snap = iterator.next();
+
+                    TeamBody data = snap.getValue(TeamBody.class);
+                    temp.add(data);
+                }
+
+//                    post update to activity
+                ldTeamsList.postValue(temp);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+
 
 
 

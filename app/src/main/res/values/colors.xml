@@ -8,8 +8,9 @@
     <color name="nav_home">#4527a0</color>
     <color name="nav_events">#AB47BC</color>
     <color name="nav_schedule">#0277bd</color>
+    <color name="nav_teams">#6C2BDD</color>
+    <color name="nav_notifications">#2D0261</color>
     <color name="nav_about">#EF5350</color>
-    <color name="nav_notifications">#004D40</color>
 
 
 
@@ -313,7 +314,9 @@
     <!--home frag-->
     <color name="nav_home_analogous">#2745a0</color>
     <color name="mdc_text_home">#ffffff</color>
-
+    <color name="bg_card_50_opac_black">#80000000</color>
+    <color name="bg_card_25_opac_black">#40000000</color>
+    <color name="bg_card_85_opac_black">#D9000000</color>
 
 
 </resources>

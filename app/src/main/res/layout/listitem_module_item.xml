@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,42 +9,49 @@
     android:layout_marginRight="@dimen/margin_padding_size_small"
     android:layout_marginLeft="@dimen/margin_padding_size_small"
     android:layout_marginBottom="@dimen/margin_padding_size_small"
-
-    >
+    app:cardBackgroundColor="@color/bg_card_50_opac_black">
     <RelativeLayout
         android:id="@+id/rl1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+        <TextView
+            android:id="@+id/tv_module_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@tools:sample/lorem"
+            android:paddingStart="@dimen/margin_padding_size_medium"
+            android:paddingEnd="@dimen/margin_padding_size_medium"
+            android:paddingBottom="@dimen/margin_padding_size_small"
+            android:textColor="@color/md_grey_50"
+            android:background="@color/bg_card_50_opac_black"
+            android:fontFamily="@font/lora_bold"
+            android:textSize="@dimen/text_size_large"
+            />
+
         <ImageView
             android:id="@+id/iv_module_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
+            android:maxHeight="200dp"
+            android:adjustViewBounds="true"
+            android:layout_below="@id/tv_module_name"
             android:layout_gravity="center"
             tools:src="@mipmap/ic_launcher"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="170dp"
-            android:background="@color/md_grey_50"
+            android:layout_below="@id/iv_module_image"
+            android:background="@color/bg_card_25_opac_black"
             android:layout_marginStart="@dimen/margin_padding_size_large"
             android:layout_marginEnd="@dimen/margin_padding_size_large"
             >
-            <TextView
-                android:id="@+id/tv_module_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="@tools:sample/lorem"
-                android:layout_marginStart="@dimen/margin_padding_size_small"
-                android:textColor="@color/md_black_1000"
-                android:fontFamily="@font/lora_bold"
-                android:textSize="@dimen/text_size_xlarge"
-                />
+
             <TextView
 
                 android:id="@+id/tv_module_description"
@@ -52,7 +60,8 @@
                 android:text="@string/lorem_180"
                 android:ellipsize="end"
                 android:maxLines="5"
-                android:fontFamily="@font/lora_regular"
+                android:textColor="@color/md_grey_100"
+                android:fontFamily="@fonts/lora_regular"
                 android:padding="@dimen/margin_padding_size_medium"
                 android:textSize="@dimen/text_size_medium"
 

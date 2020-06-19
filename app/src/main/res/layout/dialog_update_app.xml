@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="An Update is available for your app."
+            android:padding="@dimen/margin_padding_size_medium"
+            android:textAlignment="center"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_update_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update now"
+                app:icon="@drawable/ic_play"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/margin_padding_size_medium"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_update_skip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/btn_update_app"
+                android:text="Skip"
+                android:textColor="@color/md_grey_800"
+                android:backgroundTint="@color/md_grey_300"
+                android:layout_marginEnd="@dimen/margin_padding_size_medium"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

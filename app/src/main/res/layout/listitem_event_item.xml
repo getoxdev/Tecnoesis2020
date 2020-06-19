@@ -5,8 +5,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="@dimen/margin_padding_size_small"
-    android:background="@drawable/bg_border_bottom"
+    android:background="@color/bg_card_25_opac_black"
     android:id="@+id/llParent"
+    android:layout_marginBottom="@dimen/margin_padding_size_small"
     >
 
     <LinearLayout
@@ -14,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
         >
 
 
@@ -39,10 +39,11 @@
                 android:id="@+id/tv_event_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/md_purple_600"
-                android:textSize="@dimen/text_size_medium"
+                android:textColor="@color/md_green_400"
+                android:textSize="@dimen/text_size_large"
+                android:fontFamily="@font/roboto_medium"
                 android:text="Jhonny Dep"
-                android:textStyle="bold"
+
                 />
 
             <TextView
@@ -50,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_micro"
+                android:textColor="@color/md_grey_200"
                 android:text="23rd October @Auditorium"
                 />
             <TextView
@@ -59,6 +61,7 @@
                 android:layout_marginTop="2dp"
                 android:textSize="@dimen/text_size_small"
                 android:maxLines="5"
+                android:textColor="@color/md_grey_100"
                 android:ellipsize="end"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sapien velit, aliquet eget commodo nec, auctor a sapien. Nam eu neque vulputate diam rhoncus faucibus. Curabitur quis varius libero. Lorem." />
 
